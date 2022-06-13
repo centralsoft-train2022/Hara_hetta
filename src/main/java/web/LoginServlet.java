@@ -18,6 +18,12 @@ public class LoginServlet extends HttpServlet
 	) throws ServletException, IOException
 	{
 
+		// 画面から入力したデータを取得する
+		String idStr = request.getParameter( "ID" );
+//		String	peStr	= request.getParameter( "PW" );
+
+		int id = Integer.parseInt( idStr );
+
 		RequestDispatcher disp = request.getRequestDispatcher( "top.jsp" );
 		disp.forward( request, response );
 	}
