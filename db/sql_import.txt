@@ -1,0 +1,3 @@
+mysqlimport db_name TagNakami.scv
+
+                       ↑ここはテーブルにあったファイルに変えて
