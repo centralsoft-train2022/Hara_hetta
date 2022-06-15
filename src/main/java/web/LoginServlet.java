@@ -18,44 +18,79 @@ import dao.UserDao;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet
 {
-	protected void doPost(
-	        HttpServletRequest request,
-	        HttpServletResponse response
-	) throws ServletException, IOException
+	private static final long serialVersionUID = 1L;
+
+	// ログイン画面の表示処理
+	protected void doGet( HttpServletRequest request, HttpServletResponse response )
+	        throws ServletException, IOException
 	{
+		RequestDispatcher dispatcher = request.getRequestDispatcher( "top.jsp" );
+		dispatcher.forward( request, response );
+	}
+
+	// ログイン認証のメインロジック
+	protected void doPost( HttpServletRequest request, HttpServletResponse response )
+	        throws ServletException, IOException
+	{
+		// 文字コードの設定
+		response.setContentType( "text/html; charset=UTF-8" );
+		request.setCharacterEncoding( "UTF-8" );
 
 		// 画面から入力したデータを取得する
 		String	idStr	= request.getParameter( "ID" );
 		String	pwStr	= request.getParameter( "PW" );
 
-		int id = Integer.parseInt( idStr );
+		try
+		{
 
-		// セッションに保存
-		HttpSession session = request.getSession( );
-		session.setAttribute( "UserID", id );
-		session.setAttribute( "Pass", pwStr );
+			int id = Integer.parseInt( idStr );
 
-		DBUtil util = new DBUtil( );
+			// セッションに保存
+			HttpSession session = request.getSession( );
+			session.setAttribute( "UserID", idStr );
+			session.setAttribute( "Pass", pwStr );
 
-		Connection con = util.getConnection( );
+			DBUtil util = new DBUtil( );
 
-		UserDao		userDao		= new UserDao( con );
-		LoginBean	loginBean	= userDao.getAccount( id, pwStr );
+			Connection con = util.getConnection( );
 
-		request.setAttribute( "bean", loginBean );
+			UserDao	userDao		= new UserDao( con );
+			LoginBean	loginBean	= userDao.findUser( id, pwStr );
 
-		if( loginBean == null )
+			boolean isLogin = (loginBean != null & idStr.equals( loginBean.getUserID( ) ) &&
+			        pwStr.equals( loginBean.getPassword( ) ));
+
+			session.setAttribute( "isLogin", isLogin );
+
+			request.setAttribute( "bean", loginBean );
+
+			if( !isLogin )
+			{
+//			RequestDispatcher disp = request.getRequestDispatcher( "login.jsp" );
+//			disp.forward( request, response );
+
+				RequestDispatcher disp = request.getRequestDispatcher( "top.jsp" );
+				disp.forward( request, response );
+			}
+			else
+			{
+
+				RequestDispatcher disp = request.getRequestDispatcher( "login.jsp" );
+				disp.forward( request, response );
+			}
+		}
+		catch( NullPointerException e )
+		{
+
+			RequestDispatcher disp = request.getRequestDispatcher( "login.jsp" );
+			disp.forward( request, response );
+		}
+
+		catch( NumberFormatException e )
+
 		{
 			RequestDispatcher disp = request.getRequestDispatcher( "login.jsp" );
 			disp.forward( request, response );
-
-		}
-		else
-		{
-
-			RequestDispatcher disp = request.getRequestDispatcher( "top.jsp" );
-			disp.forward( request, response );
-
 		}
 
 	}
