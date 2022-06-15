@@ -74,11 +74,16 @@
 
 	
 
-	<form method="POST" action="registeredMain.jsp" method="POST"
-		action="addTag.jsp">
-		<input type="submit" value="追加"> <input type="submit"
-			value="タグ追加">
+	
+	<div style="display:inline-flex">
+	<form method="POST" action="registeredMain.jsp">
+		<input type="submit" value="追加">
 	</form>
+	
+	 <form method="POST" action="addTag.jsp">
+		 <input type="submit"value="タグ追加">
+	</form>
+	</div>
 
 
 

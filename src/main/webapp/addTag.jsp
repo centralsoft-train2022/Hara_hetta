@@ -20,7 +20,7 @@
    		 
    		 <br>
    		 
-   		 に<input name="n" type="text" >回食べたら警告します🔔<br>
+   		 に<input name="n" type="text" size="2">回食べたら警告します🔔<br>
 		</form>	
 		
 		<br>
