@@ -3,31 +3,31 @@ package bean;
 public class LoginBean
 {
 
-	private int		id;
-	private String	pass;
+	private int		UserID;
+	private String	Password;
 
-	public int getId()
+	public int getUserID()
 	{
 
-		return id;
+		return UserID;
 	}
 
-	public void setId( int id )
+	public void setUserID( int UserID )
 	{
 
-		this.id = id;
+		this.UserID = UserID;
 	}
 
-	public String getPass()
+	public String getPassword()
 	{
 
-		return pass;
+		return Password;
 	}
 
-	public void setPass( String pass )
+	public void setPassword( String Password )
 	{
 
-		this.pass = pass;
+		this.Password = Password;
 	}
 
 }

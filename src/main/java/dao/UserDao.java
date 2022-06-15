@@ -12,21 +12,7 @@ public class UserDao
 
 	private Connection con;
 
-//	private static final String SELECT_USER_SQL = "SELECT"
-//	        + "UserID"
-//	        + ",Password"
-//	        + "FROM"
-//	        + "user"
-//	        + "WHERE"
-//	        + "UserID "
-//	        + "="
-//	        + "1"
-//	        + "AND"
-//	        + "Password "
-//	        + "= "
-//	        + "aaaaa";
-
-	private static final String SELECT_USER_SQL2 = "SELECT UserID ,Password FROM user WHERE UserID= 1 AND Password='aaaaa'";
+	private static final String SELECT_USER_SQL2 = "SELECT UserID ,Password FROM user WHERE UserID=? AND Password=?";
 
 	public UserDao( Connection con )
 	{
@@ -34,38 +20,74 @@ public class UserDao
 		this.con = con;
 	}
 
-	public LoginBean getAccount( int id, String pass )
+	private static void allClose( PreparedStatement statement, Connection connection )
 	{
-		LoginBean loginBean = null;
-//		LoginBean loginBean = new LoginBean( );
-//		
-//		loginBean.setId("1");
-//		loginBean.setPass("1");
 
-		try( PreparedStatement stmt = this.con.prepareStatement( SELECT_USER_SQL2 ) )
+		if( statement != null )
 		{
-//			stmt.setInt( 1, id );
 
-			try( ResultSet rset = stmt.executeQuery( ); )
+			try
 			{
-				loginBean = new LoginBean( );
-
-				/* 取得したデータをインスタンスにまとめます */
-				while( rset.next( ) )
-				{
-
-					loginBean.setId( rset.getInt( "UserID" ) );
-					loginBean.setPass( rset.getString( "Password" ) );
-
-				}
-				return loginBean;
-
+				statement.close( );
+			}
+			catch( SQLException e )
+			{
+				e.printStackTrace( );
 			}
 		}
-		catch( SQLException e )
+
+		if( connection != null )
 		{
-			throw new RuntimeException( e );
+
+			try
+			{
+				connection.close( );
+			}
+			catch( SQLException e )
+			{
+				e.printStackTrace( );
+			}
 		}
 
 	}
+
+	static Connection			connection;
+	static PreparedStatement	statement	= null;
+
+	public LoginBean findUser( int UserID, String Password )
+	{
+		LoginBean user = new LoginBean( );
+
+		try
+		{
+			DBUtil utl = new DBUtil( );
+			connection = utl.getConnection( );
+
+			statement = connection.prepareStatement( SELECT_USER_SQL2 );
+			statement.setInt( 1, UserID );
+			statement.setString( 2, Password );
+
+			ResultSet resultSet = statement.executeQuery( );
+
+			if( !resultSet.next( ) )
+			{
+				return null;
+			}
+
+			user.setUserID( resultSet.getInt( "UserID" ) );
+			user.setPassword( resultSet.getString( "Password" ) );
+
+		}
+		catch( SQLException e )
+		{
+			e.printStackTrace( );
+		}
+		finally
+		{
+			allClose( statement, connection );
+		}
+		return user;
+
+	}
+
 }
