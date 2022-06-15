@@ -12,23 +12,29 @@ public class TagAddDao {
 		this.c = con;
 	}
 
-	private static final String INSERT_TAG_SQL = "INSERT"
-			+ "INTO"
-			+ "TAG"
-			+ "TAGNAME"
-			+ "VALUES"
-			+ "("
-			+ "?"
-			+ ")";
+	private static final String INSERT_TAG_SQL = "insert\n"
+			+ " into tag\n"
+			+ " (\n"
+			+ " tagname\n"
+			+ " )\n"
+			+ " values\n"
+			+ " (\n"
+			+ "  ?\n"
+			+ " )";
 
-	public void insert(TagVo tagData) {
+	private static final String INSERT_WARNING_SQL = "";
+
+	public void insert(String tnStr) {
+
+		System.out.println(tnStr);
 
 		try (PreparedStatement stmt = this.c.prepareStatement(INSERT_TAG_SQL)) {
 
-			stmt.setString(1, tagData.getTagName());
+			stmt.setString(1, tnStr);
 
 			/* ｓｑｌ実行 */
-			stmt.executeLargeUpdate();
+			stmt.executeUpdate();
+			c.commit();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

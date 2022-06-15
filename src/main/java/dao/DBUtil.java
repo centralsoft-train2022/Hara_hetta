@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBUtil
-{
+public class DBUtil {
 	// 接続文字列の構築
 	/* ユーザ名 */
 	// private static final String USER = "root";
@@ -25,31 +24,26 @@ public class DBUtil
 	private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
 
 	// コネクション取得の共通メソッド
-	public Connection getConnection()
-	{
+	public Connection getConnection() {
 		Connection con = null;
 
-		try
-		{
+		try {
 			// ドライバーのロード
-			Class.forName( DRIVER_CLASS );
+			Class.forName(DRIVER_CLASS);
 
 			// ① 接続の実行とコネクションオブジェクトの取得
 			con = DriverManager.getConnection(
-			        "jdbc:mysql://"
-			                + SERVER_NAME
-			                + "/"
-			                + DB_NAME,
-			        USER,
-			        PASS
-			);
+					"jdbc:mysql://"
+							+ SERVER_NAME
+							+ "/"
+							+ DB_NAME,
+					USER,
+					PASS);
 
 			// オートコミットをOFFにする
-			con.setAutoCommit( false );
-		}
-		catch( ClassNotFoundException | SQLException e )
-		{
-			throw new RuntimeException( e );
+			con.setAutoCommit(false);
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new RuntimeException(e);
 		}
 
 		return con;
