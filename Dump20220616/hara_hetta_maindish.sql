@@ -16,28 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tag`
+-- Table structure for table `maindish`
 --
 
-DROP TABLE IF EXISTS `tag`;
+DROP TABLE IF EXISTS `maindish`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tag` (
-  `TagID` int NOT NULL AUTO_INCREMENT,
-  `TagName` varchar(45) NOT NULL,
-  PRIMARY KEY (`TagID`),
-  UNIQUE KEY `TagName_UNIQUE` (`TagName`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `maindish` (
+  `DishID` int NOT NULL AUTO_INCREMENT,
+  `DishDate` date NOT NULL,
+  `DishName` varchar(45) NOT NULL,
+  `DishBikou` varchar(45) NOT NULL,
+  `User_UserID` int NOT NULL,
+  `Tag_TagID` int NOT NULL,
+  `MorningDayNightDivide` int NOT NULL,
+  PRIMARY KEY (`DishID`),
+  KEY `fk_MainDish_User1_idx` (`User_UserID`),
+  KEY `fk_MainDish_Tag1_idx` (`Tag_TagID`),
+  CONSTRAINT `fk_MainDish_Tag1` FOREIGN KEY (`Tag_TagID`) REFERENCES `tag` (`TagID`),
+  CONSTRAINT `fk_MainDish_User1` FOREIGN KEY (`User_UserID`) REFERENCES `user` (`UserID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tag`
+-- Dumping data for table `maindish`
 --
 
-LOCK TABLES `tag` WRITE;
-/*!40000 ALTER TABLE `tag` DISABLE KEYS */;
-INSERT INTO `tag` VALUES (102,'うどん'),(104,'カレー'),(100,'ラーメン'),(103,'寿司'),(101,'鍋');
-/*!40000 ALTER TABLE `tag` ENABLE KEYS */;
+LOCK TABLES `maindish` WRITE;
+/*!40000 ALTER TABLE `maindish` DISABLE KEYS */;
+/*!40000 ALTER TABLE `maindish` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-15 14:56:54
+-- Dump completed on 2022-06-15 15:27:42

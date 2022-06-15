@@ -16,29 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `tag`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `UserID` int NOT NULL,
-  `UserMail` varchar(45) NOT NULL,
-  `Password` varchar(45) NOT NULL,
-  PRIMARY KEY (`UserID`),
-  UNIQUE KEY `UserID_UNIQUE` (`UserMail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `tag` (
+  `TagID` int NOT NULL AUTO_INCREMENT,
+  `TagName` varchar(45) NOT NULL,
+  PRIMARY KEY (`TagID`),
+  UNIQUE KEY `TagName_UNIQUE` (`TagName`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `tag`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'aaa@aaa.com','aaaaa'),(2,'bbb@bbb.com','bbbbb'),(3,'ccc@ccc.com','ccccc'),(4,'ddd@ddd.com','ddddd'),(5,'eee@eee.com','eeeee');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `tag` WRITE;
+/*!40000 ALTER TABLE `tag` DISABLE KEYS */;
+INSERT INTO `tag` VALUES (2,'うどん'),(1,'カレー'),(3,'ラーメン'),(4,'寿司'),(5,'鍋');
+/*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-15 14:56:54
+-- Dump completed on 2022-06-15 15:27:42

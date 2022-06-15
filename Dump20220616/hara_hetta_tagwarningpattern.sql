@@ -16,35 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `maindish`
+-- Table structure for table `tagwarningpattern`
 --
 
-DROP TABLE IF EXISTS `maindish`;
+DROP TABLE IF EXISTS `tagwarningpattern`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `maindish` (
-  `DishID` int NOT NULL AUTO_INCREMENT,
-  `DishDate` date NOT NULL,
-  `DishName` varchar(45) NOT NULL,
-  `DishBikou` varchar(45) NOT NULL,
+CREATE TABLE `tagwarningpattern` (
+  `TagWarningPatternID` int NOT NULL AUTO_INCREMENT,
+  `WarningMessage` varchar(45) DEFAULT NULL,
+  `WarningSetting` int NOT NULL,
   `User_UserID` int NOT NULL,
   `Tag_TagID` int NOT NULL,
-  `MorningDayNightDivide` int NOT NULL,
-  PRIMARY KEY (`DishID`,`User_UserID`,`Tag_TagID`),
-  KEY `fk_MainDish_User1_idx` (`User_UserID`),
-  KEY `fk_MainDish_Tag1_idx` (`Tag_TagID`),
-  CONSTRAINT `fk_MainDish_Tag1` FOREIGN KEY (`Tag_TagID`) REFERENCES `tag` (`TagID`),
-  CONSTRAINT `fk_MainDish_User1` FOREIGN KEY (`User_UserID`) REFERENCES `user` (`UserID`)
+  `EatYesOrNo` tinyint DEFAULT NULL,
+  `WarningCount` int NOT NULL,
+  PRIMARY KEY (`TagWarningPatternID`),
+  KEY `fk_TagWarningPattern_User_idx` (`User_UserID`),
+  KEY `fk_TagWarningPattern_Tag1_idx` (`Tag_TagID`),
+  CONSTRAINT `fk_TagWarningPattern_Tag1` FOREIGN KEY (`Tag_TagID`) REFERENCES `tag` (`TagID`),
+  CONSTRAINT `fk_TagWarningPattern_User` FOREIGN KEY (`User_UserID`) REFERENCES `user` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `maindish`
+-- Dumping data for table `tagwarningpattern`
 --
 
-LOCK TABLES `maindish` WRITE;
-/*!40000 ALTER TABLE `maindish` DISABLE KEYS */;
-/*!40000 ALTER TABLE `maindish` ENABLE KEYS */;
+LOCK TABLES `tagwarningpattern` WRITE;
+/*!40000 ALTER TABLE `tagwarningpattern` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tagwarningpattern` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-15 14:56:54
+-- Dump completed on 2022-06-15 15:27:42
