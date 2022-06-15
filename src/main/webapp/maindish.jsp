@@ -76,7 +76,7 @@
 
 	
 	<div style="display:inline-flex">
-	<form method="POST" action="registeredMain.jsp">
+	<form method="POST" action="MaindishServlet">
 		<input type="submit" value="追加">
 	</form>
 	
