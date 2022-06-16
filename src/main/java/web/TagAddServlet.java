@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.TagAddBean;
 import dao.DBUtil;
 import dao.TagAddDao;
 
@@ -22,8 +24,12 @@ public class TagAddServlet extends HttpServlet {
 		// 画面から入力したデータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String tnStr = request.getParameter("tag");
-		String kikan = request.getParameter("radiobutton");
-		String cnt = request.getParameter("cnt");
+
+		// セッションに保存
+		HttpSession session = request.getSession();
+		session.setAttribute("TagName", tnStr);
+		//		String kikan = request.getParameter("radiobutton");
+		//		String cnt = request.getParameter("cnt");
 
 		insertTag(tnStr);
 
@@ -36,7 +42,13 @@ public class TagAddServlet extends HttpServlet {
 	private void insertTag(String tnStr) {
 		DBUtil db = new DBUtil();
 		Connection con = db.getConnection();
+
 		TagAddDao tad = new TagAddDao(con);
-		tad.insert(tnStr);
+
+		TagAddBean bean = new TagAddBean();
+		bean.setTagName(tnStr);
+
+		//TagAddBean tabean = tad.insert(tnStr);
+		tad.insert(bean.getTagName());
 	}
 }

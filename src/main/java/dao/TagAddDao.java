@@ -22,15 +22,15 @@ public class TagAddDao {
 			+ "  ?\n"
 			+ " )";
 
-	private static final String INSERT_WARNING_SQL = "";
+	//	private static final String INSERT_WARNING_SQL = "";
 
-	public void insert(String tnStr) {
+	public void insert(String tn) {
 
-		System.out.println(tnStr);
+		System.out.println(tn);
 
 		try (PreparedStatement stmt = this.c.prepareStatement(INSERT_TAG_SQL)) {
 
-			stmt.setString(1, tnStr);
+			stmt.setString(1, tn);
 
 			/* ｓｑｌ実行 */
 			stmt.executeUpdate();
