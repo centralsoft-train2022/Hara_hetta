@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <title>カレンダー表示</title>
 <link rel="stylesheet" href="css/style.css">
+<script type="text/javascript">
+<% com.fasterxml.jackson.databind.ObjectMapper a= new com.fasterxml.jackson.databind.ObjectMapper();%>
+var foodName= <%= a.writeValueAsString(request.getAttribute("foodName")) %>;
+</script>
+
 </head>
 <body>
 <body>
