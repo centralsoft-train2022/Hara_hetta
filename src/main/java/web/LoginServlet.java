@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet
 
 			Connection con = util.getConnection( );
 
-			UserDao	userDao		= new UserDao( con );
+			UserDao		userDao		= new UserDao( con );
 			LoginBean	loginBean	= userDao.findUser( id, pwStr );
 
 			boolean isLogin = (loginBean != null & idStr.equals( loginBean.getUserID( ) ) &&
@@ -66,9 +66,6 @@ public class LoginServlet extends HttpServlet
 
 			if( !isLogin )
 			{
-//			RequestDispatcher disp = request.getRequestDispatcher( "login.jsp" );
-//			disp.forward( request, response );
-
 				RequestDispatcher disp = request.getRequestDispatcher( "top.jsp" );
 				disp.forward( request, response );
 			}
