@@ -1,5 +1,8 @@
+<%@page import="dao.TagVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<jsp:useBean id="bean" class="bean.MaindishBean" scope="request" />
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,57 +16,66 @@
 	<p>
 		朝：<input type="text" name="morning">
 	</p>
-	<select name="example">
-		<option value="サンプル1">サンプル1</option>
-		<option value="サンプル2">サンプル2</option>
-		<option value="サンプル3">サンプル3</option>
+	<select name="morning1">
+	<% for( dao.TagVo tag:  bean.getTagList(  )){ %>
+		<option value="<%=tag.getTagID()%>"><%=tag.getTagName()%></option>
+		
+	<% }%>
 	</select>
-<select name="example">
-		<option value="サンプル1">サンプル1</option>
-		<option value="サンプル2">サンプル2</option>
-		<option value="サンプル3">サンプル3</option>
+<select name="morning2">
+		<% for( dao.TagVo tag:  bean.getTagList(  )){ %>
+		<option value="<%=tag.getTagID()%>"><%=tag.getTagName()%></option>
+		
+	<% }%>
 	</select>
-	<select name="example">
-		<option value="サンプル1">サンプル1</option>
-		<option value="サンプル2">サンプル2</option>
-		<option value="サンプル3">サンプル3</option>
+	<select name="morning3">
+		<% for( dao.TagVo tag:  bean.getTagList(  )){ %>
+		<option value="<%=tag.getTagID()%>"><%=tag.getTagName()%></option>
+		
+	<% }%>
 	</select>
 	<p>
 		昼：<input type="text" name="noon">
 	</p>
-	<select name="example">
-		<option value="サンプル1">サンプル1</option>
-		<option value="サンプル2">サンプル2</option>
-		<option value="サンプル3">サンプル3</option>
+	<select name="noon1">
+		<% for( dao.TagVo tag:  bean.getTagList(  )){ %>
+		<option value="<%=tag.getTagID()%>"><%=tag.getTagName()%></option>
+		
+	<% }%>
 	</select>
-	<select name="example">
-		<option value="サンプル1">サンプル1</option>
-		<option value="サンプル2">サンプル2</option>
-		<option value="サンプル3">サンプル3</option>
+	<select name="noon2">
+		<% for( dao.TagVo tag:  bean.getTagList(  )){ %>
+		<option value="<%=tag.getTagID()%>"><%=tag.getTagName()%></option>
+		
+	<% }%>
 	</select>
-	<select name="example">
-		<option value="サンプル1">サンプル1</option>
-		<option value="サンプル2">サンプル2</option>
-		<option value="サンプル3">サンプル3</option>
+	<select name="noon3">
+		<% for( dao.TagVo tag:  bean.getTagList(  )){ %>
+		<option value="<%=tag.getTagID()%>"><%=tag.getTagName()%></option>
+		
+	<% }%>
 	</select>
 
 	<p>
 		夜：<input type="text" name="night">
 	</p>
-	<select name="example">
-		<option value="サンプル1">サンプル1</option>
-		<option value="サンプル2">サンプル2</option>
-		<option value="サンプル3">サンプル3</option>
+	<select name="night1">
+		<% for( dao.TagVo tag:  bean.getTagList(  )){ %>
+		<option value="<%=tag.getTagID()%>"><%=tag.getTagName()%></option>
+		
+	<% }%>
 	</select>
-<select name="example">
-		<option value="サンプル1">サンプル1</option>
-		<option value="サンプル2">サンプル2</option>
-		<option value="サンプル3">サンプル3</option>
+<select name="night2">
+		<% for( dao.TagVo tag:  bean.getTagList(  )){ %>
+		<option value="<%=tag.getTagID()%>"><%=tag.getTagName()%></option>
+		
+	<% }%>
 	</select>
-	<select name="example">
-		<option value="サンプル1">サンプル1</option>
-		<option value="サンプル2">サンプル2</option>
-		<option value="サンプル3">サンプル3</option>
+	<select name="night3">
+		<% for( dao.TagVo tag:  bean.getTagList(  )){ %>
+		<option value="<%=tag.getTagID()%>"><%=tag.getTagName()%></option>
+		
+	<% }%>
 	</select>
 	<br>
 	<br>
@@ -76,7 +88,7 @@
 
 	
 	<div style="display:inline-flex">
-	<form method="POST" action="MaindishServlet">
+	<form method="POST" action="registeredMainServlet">
 		<input type="submit" value="追加">
 	</form>
 	
