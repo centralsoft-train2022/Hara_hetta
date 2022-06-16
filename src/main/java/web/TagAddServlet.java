@@ -24,14 +24,25 @@ public class TagAddServlet extends HttpServlet {
 		// 画面から入力したデータを取得する
 		request.setCharacterEncoding("UTF-8");
 		String tnStr = request.getParameter("tag");
+		String stKikanStr = request.getParameter("radiobutton");
+		String stCountStr = request.getParameter("cnt");
+
+		int stKikan = Integer.parseInt(stKikanStr);
+		int stCount = Integer.parseInt(stCountStr);
 
 		// セッションに保存
 		HttpSession session = request.getSession();
 		session.setAttribute("TagName", tnStr);
-		//		String kikan = request.getParameter("radiobutton");
-		//		String cnt = request.getParameter("cnt");
+		session.setAttribute("WarningSetting", stKikan);
+		session.setAttribute("WarningCount", stCount);
 
-		insertTag(tnStr);
+		int wstKikan = (Integer) session.getAttribute("WarningSetting");
+		int wstCount = (Integer) session.getAttribute("WarningCount");
+
+		int uid = (Integer) session.getAttribute("UserID");
+		System.out.println(uid);
+
+		insertTag(tnStr, uid, wstKikan, wstCount);
 
 		//int tn = Integer.parseInt(tnStr);
 
@@ -39,16 +50,21 @@ public class TagAddServlet extends HttpServlet {
 		disp.forward(request, response);
 	}
 
-	private void insertTag(String tnStr) {
+	private void insertTag(String tnStr, int uid, int stKikan, int stCount) {
 		DBUtil db = new DBUtil();
 		Connection con = db.getConnection();
 
 		TagAddDao tad = new TagAddDao(con);
+		//UserDao ud = new UserDao(con);
 
 		TagAddBean bean = new TagAddBean();
 		bean.setTagName(tnStr);
+		bean.setWarningSetting(stKikan);
+		bean.setWarningCount(stCount);
 
 		//TagAddBean tabean = tad.insert(tnStr);
-		tad.insert(bean.getTagName());
+		tad.insertTagName(bean.getTagName());
+		int tgidget = tad.getTagID();
+		tad.insertTagSetting(bean.getWarningSetting(), bean.getWarningCount(), uid, tgidget);
 	}
 }

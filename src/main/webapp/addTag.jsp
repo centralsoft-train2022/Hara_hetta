@@ -15,9 +15,9 @@
 		
 		警告設定<br>
 
-   	 	<input type="radio" name="radiobutton" value="1week"> 1週間<br>
-   		 <input type="radio" name="radiobutton" value="2week"> 2週間<br>
-   		 <input type="radio" name="radiobutton" value="1mouth"> 1ヵ月<br>
+   	 	<input type="radio" name="radiobutton" value="1"> 1週間<br>
+   		 <input type="radio" name="radiobutton" value="2"> 2週間<br>
+   		 <input type="radio" name="radiobutton" value="3"> 1ヵ月<br>
    		 
    		 <br>
    		 
