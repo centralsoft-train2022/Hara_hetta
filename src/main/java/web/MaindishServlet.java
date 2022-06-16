@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.MaindishBean;
 import dao.DBUtil;
-import dao.DishsaveDao;
 import dao.TagDao;
 import dao.TagVo;
 
@@ -22,36 +22,19 @@ import dao.TagVo;
 public class MaindishServlet extends HttpServlet
 {
 
-	protected void doPost(
+	protected void doGet(
 	        HttpServletRequest request,
 	        HttpServletResponse response
 	) throws ServletException, IOException
 	{
+		MaindishBean bean = new MaindishBean( );
+		bean.setTagList( getTagVo( ) );
+		bean.setUsername( "まえだ" );
 
-		// 画面から入力したデータを取得する
-		// String dishDateStr = request.getParameter( "dishdate" );
-		String	MorningdishName	= request.getParameter( "morningdishname" );
-		String	NoondishName	= request.getParameter( "noondishname" );
-		String	NightdishName	= request.getParameter( "nightdishname" );
+		request.setAttribute( "bean", bean );
 
-		// 入力した食べ物をDBに保存
-		DBUtil db = new DBUtil( );
-
-		try( Connection c = db.getConnection( ) )
-		{
-
-			DishsaveDao dishdao = new DishsaveDao( c );
-			dishdao.DishInsert( MorningdishName );
-			dishdao.DishInsert( NoondishName );
-			dishdao.DishInsert( NightdishName );
-		}
-		catch( SQLException e )
-		{
-			e.printStackTrace( );
-		}
-		// JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher( "/registeredMain.jsp" );
-		disp.forward( request, response );
+		RequestDispatcher dispatcher = request.getRequestDispatcher( "maindish.jsp" );
+		dispatcher.forward( request, response );
 	}
 
 	// ①DBからタグのデータを取ってくる
