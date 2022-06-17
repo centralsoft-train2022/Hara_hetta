@@ -2,6 +2,7 @@ package web;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,35 +37,41 @@ public class TagAddServlet extends HttpServlet {
 		session.setAttribute("WarningSetting", stKikan);
 		session.setAttribute("WarningCount", stCount);
 
+		//セッションのObject型からint型への変換
 		int wstKikan = (Integer) session.getAttribute("WarningSetting");
 		int wstCount = (Integer) session.getAttribute("WarningCount");
 
+		//LoginServletのセッションからuserIDを取得
 		int uid = (Integer) session.getAttribute("UserID");
 		System.out.println(uid);
 
 		insertTag(tnStr, uid, wstKikan, wstCount);
 
-		//int tn = Integer.parseInt(tnStr);
-
+		//次の画面に遷移
 		RequestDispatcher disp = request.getRequestDispatcher("registeredTag.jsp");
 		disp.forward(request, response);
 	}
 
+	//Cnnection取得して、3種類のSQL実行しているメソッドのそれぞれを呼び出し
 	private void insertTag(String tnStr, int uid, int stKikan, int stCount) {
 		DBUtil db = new DBUtil();
-		Connection con = db.getConnection();
 
-		TagAddDao tad = new TagAddDao(con);
-		//UserDao ud = new UserDao(con);
+		try (Connection con = db.getConnection()) {
 
-		TagAddBean bean = new TagAddBean();
-		bean.setTagName(tnStr);
-		bean.setWarningSetting(stKikan);
-		bean.setWarningCount(stCount);
+			TagAddDao tad = new TagAddDao(con);
 
-		//TagAddBean tabean = tad.insert(tnStr);
-		tad.insertTagName(bean.getTagName());
-		int tgidget = tad.getTagID();
-		tad.insertTagSetting(bean.getWarningSetting(), bean.getWarningCount(), uid, tgidget);
+			//Beanに保存
+			TagAddBean bean = new TagAddBean();
+			bean.setTagName(tnStr);
+			bean.setWarningSetting(stKikan);
+			bean.setWarningCount(stCount);
+
+			tad.insertTagName(bean.getTagName());
+			int tgidget = tad.getTagID();
+			tad.insertTagSetting(bean.getWarningSetting(), bean.getWarningCount(), uid, tgidget);
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

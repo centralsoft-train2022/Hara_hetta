@@ -24,6 +24,7 @@ public class TagAddDao {
 			+ "  ?\n"
 			+ " )";
 
+	//タグの名前をDBのtagテーブルに保存
 	public void insertTagName(String tn) {
 
 		try (PreparedStatement stmt = this.c.prepareStatement(INSERT_TAG_SQL)) {
@@ -44,6 +45,7 @@ public class TagAddDao {
 			+ " FROM\n"
 			+ " hara_hetta.tag\n";
 
+	//tagIDの最大値（一番最新で追加されたタグ）をDBからとってくる
 	public int getTagID() {
 		try (PreparedStatement stmt = this.c.prepareStatement(SELECT_TAGID_SQL)) {
 			TagVo tgv = new TagVo();
@@ -77,6 +79,7 @@ public class TagAddDao {
 			+ "  ?\n"
 			+ "  )\n";
 
+	//外部キーのuserID、tagIDと期間設定とカウントの数を紐づけてDBのWarningTagPatternテーブルに保存
 	public void insertTagSetting(int ts, int tw, int uid, int tgidget) {
 
 		try (PreparedStatement stmt = this.c.prepareStatement(INSERT_WARNING_SQL)) {
