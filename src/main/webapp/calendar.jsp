@@ -46,7 +46,7 @@ var foodName= <%= a.writeValueAsString(request.getAttribute("foodName")) %>;
 	</div>
 	<script src="js/calendar.js" type="text/javascript"></script>
 
-	<form method="POST" action="maindish.jsp">
+	<form method="GET" action="MaindishServlet">
 		<input type="submit" value="追加">
 	</form>
 
