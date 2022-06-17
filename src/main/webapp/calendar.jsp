@@ -14,7 +14,7 @@ var foodName= <%= a.writeValueAsString(request.getAttribute("foodName")) %>;
 </head>
 <body>
 <body>
-	<h1 class="cauntion">警告メッセージ</h1>
+	<h1 class="cauntion" >警告メッセージ</h1>	
 	<div class="container-calendar">
 		<h4 id="monthAndYear"></h4>
 		<div class="button-container-calendar">
