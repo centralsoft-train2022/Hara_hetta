@@ -32,7 +32,7 @@
 		
 		<br>
 		
-		<form  method="POST" action="maindish.jsp">
+		<form  method="GET" action="MaindishServlet">
 		<input type="submit" value="追加に戻る">
 		</form>	
 		
