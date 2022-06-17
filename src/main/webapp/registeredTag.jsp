@@ -10,7 +10,7 @@
 		登録完了しました。
 		
 	
-		<form  method="POST" action="maindish.jsp">
+		<form  method="GET" action="MaindishServlet">
 		<input type="submit" value="入力に戻る">
 		</form>	
 		
