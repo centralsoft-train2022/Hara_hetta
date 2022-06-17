@@ -36,6 +36,8 @@ public class registeredMainServlet extends HttpServlet
 		String	morningdishName	= request.getParameter( "morningdishname" );
 		String	noondishName	= request.getParameter( "noondishname" );
 		String	nightdishName	= request.getParameter( "nightdishname" );
+
+		String bikou = request.getParameter( "bikou" );
 		// カンマごとに食べ物をリストにいれる
 //		String[]	morningList	= morningdishName.split( "," );
 //		String[]	noonList	= noondishName.split( "," );
@@ -110,7 +112,7 @@ public class registeredMainServlet extends HttpServlet
 			nightList.add( night3Int );
 		}
 
-		savetag( morningdishName, noondishName, nightdishName );
+		savetag( morningdishName, noondishName, nightdishName, bikou );
 
 		// JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher( "/registeredMain.jsp" );
@@ -118,7 +120,7 @@ public class registeredMainServlet extends HttpServlet
 	}
 
 	// 入力した食べ物をDBに保存
-	private void savetag( String morningdishName, String noondishName, String nightdishName )
+	private void savetag( String morningdishName, String noondishName, String nightdishName, String bikou )
 	{
 
 		DBUtil db = new DBUtil( );
@@ -134,7 +136,7 @@ public class registeredMainServlet extends HttpServlet
 				for( int i = 0; i < morningList.size( ); i++ )
 				{
 					int asa = 1;
-					dishdao.DishInsert( morningdishName, morningList.get( i ), asa );
+					dishdao.DishInsert( morningdishName, morningList.get( i ), asa, bikou );
 				}
 
 			}
@@ -145,7 +147,7 @@ public class registeredMainServlet extends HttpServlet
 				for( int i = 0; i < noonList.size( ); i++ )
 				{
 					int hiru = 2;
-					dishdao.DishInsert( noondishName, noonList.get( i ), hiru );
+					dishdao.DishInsert( noondishName, noonList.get( i ), hiru, bikou );
 				}
 			}
 
@@ -155,7 +157,7 @@ public class registeredMainServlet extends HttpServlet
 				for( int i = 0; i < nightList.size( ); i++ )
 				{
 					int yoru = 3;
-					dishdao.DishInsert( nightdishName, nightList.get( i ), yoru );
+					dishdao.DishInsert( nightdishName, nightList.get( i ), yoru, bikou );
 				}
 			}
 			c.commit( );
