@@ -14,16 +14,18 @@ public class DishsaveDao
 	        + " MAINDISH"
 	        + " ("
 	        + " DISHNAME"
-	        + " ,DISHID"
 	        + " ,USER_USERID"
 	        + " ,TAG_TAGID"
+	        + " ,DISHDATE"
+	        + " ,morningdaynightdivide"
 	        + " )"
 	        + " VALUES"
 	        + "("
 	        + " ? "
-	        + " ,10 "
-	        + " ,4 "
-	        + " ,101 "
+	        + " ,3"
+	        + " ,? "
+	        + " ,19970612 "
+	        + " ,1"
 	        + ")";
 
 	public DishsaveDao( Connection c )
@@ -33,15 +35,14 @@ public class DishsaveDao
 		this.con = c;
 	}
 
-	public void DishInsert( String morningdishname )
+	public void DishInsert( String dishName, Integer tagid )
 	{
 
 		try( PreparedStatement stmt = this.con.prepareStatement( INSERT_DISH_SQL ) )
 		{
 
-			stmt.setString( 1, morningdishname );
-			// stmt.setDate( 2, dishDateStr );
-
+			stmt.setString( 1, dishName );
+			stmt.setInt( 2, tagid );
 			/* ｓｑｌ実行 */
 			stmt.executeUpdate( );
 

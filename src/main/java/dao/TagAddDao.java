@@ -50,6 +50,7 @@ public class TagAddDao {
 
 			rset = stmt.executeQuery();
 
+			rset.next();
 			tgv.setTagID(rset.getInt(1));
 
 			int tagget = tgv.getTagID();
