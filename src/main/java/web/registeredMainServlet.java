@@ -133,8 +133,8 @@ public class registeredMainServlet extends HttpServlet
 
 				for( int i = 0; i < morningList.size( ); i++ )
 				{
-
-					dishdao.DishInsert( morningdishName, morningList.get( i ) );
+					int asa = 1;
+					dishdao.DishInsert( morningdishName, morningList.get( i ), asa );
 				}
 
 			}
@@ -144,7 +144,8 @@ public class registeredMainServlet extends HttpServlet
 
 				for( int i = 0; i < noonList.size( ); i++ )
 				{
-					dishdao.DishInsert( noondishName, noonList.get( i ) );
+					int hiru = 2;
+					dishdao.DishInsert( noondishName, noonList.get( i ), hiru );
 				}
 			}
 
@@ -153,7 +154,8 @@ public class registeredMainServlet extends HttpServlet
 
 				for( int i = 0; i < nightList.size( ); i++ )
 				{
-					dishdao.DishInsert( nightdishName, nightList.get( i ) );
+					int yoru = 3;
+					dishdao.DishInsert( nightdishName, nightList.get( i ), yoru );
 				}
 			}
 			c.commit( );

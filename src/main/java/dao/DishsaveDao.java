@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -22,10 +23,10 @@ public class DishsaveDao
 	        + " VALUES"
 	        + "("
 	        + " ? "
-	        + " ,3"
-	        + " ,? "
-	        + " ,19970612 "
 	        + " ,1"
+	        + " ,? "
+	        + " ,? "
+	        + " ,?"
 	        + ")";
 
 	public DishsaveDao( Connection c )
@@ -35,14 +36,20 @@ public class DishsaveDao
 		this.con = c;
 	}
 
-	public void DishInsert( String dishName, Integer tagid )
+	public void DishInsert( String dishName, Integer tagid, int asahiruyoru )
 	{
 
 		try( PreparedStatement stmt = this.con.prepareStatement( INSERT_DISH_SQL ) )
 		{
 
+			long	miliseconds	= System.currentTimeMillis( );
+			Date	date		= new Date( miliseconds );
+
 			stmt.setString( 1, dishName );
 			stmt.setInt( 2, tagid );
+			stmt.setDate( 3, date );
+			stmt.setInt( 4, asahiruyoru );
+
 			/* ｓｑｌ実行 */
 			stmt.executeUpdate( );
 
