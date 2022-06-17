@@ -3,18 +3,18 @@ package bean;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.DishVo;
+import dao.CalenderVo;
 
 public class CalenderBean {
 
 	
-	private List<DishVo> dishList = new ArrayList<DishVo>( );
+	private List<CalenderVo> dishList = new ArrayList<CalenderVo>( );
 
-	public List<DishVo> getDishList() {
+	public List<CalenderVo> getDishList() {
 		return dishList;
 	}
 
-	public void setDishList(List<DishVo> dishList) {
+	public void setDishList(List<CalenderVo> dishList) {
 		this.dishList = dishList;
 	}
 }

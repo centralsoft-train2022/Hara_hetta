@@ -13,6 +13,7 @@ public class CalenderDao
 	private Connection con;
 
 	private static final String SELECT_DISH_SQL = "select"
+			+ " DISHDATE"
 	        + " DISHNAME"
 	        + ",DISHBIKOU"
 	        + " from"
@@ -25,12 +26,12 @@ public class CalenderDao
 		this.con = c;
 	}
 	
-	public List<DishVo> getTag() throws SQLException
+	public List<CalenderVo> getTag() throws SQLException
 	{
 
-		DishVo tg = null;
+		CalenderVo tg = null;
 
-		List<DishVo> list = new ArrayList<DishVo>( );
+		List<CalenderVo> list = new ArrayList<CalenderVo>( );
 
 		try( PreparedStatement stmt = this.con.prepareStatement( SELECT_DISH_SQL ) )
 		{
@@ -42,11 +43,12 @@ public class CalenderDao
 				while( rset.next( ) )
 				{
 
-					tg = new DishVo( );
+					tg = new CalenderVo( );
 
-					tg.setDishID( rset.getInt( "DishID" ) );
+					tg.setDishDate(rset.getDate("DishDate"));
 					tg.setDishName( rset.getString( "DishName" ) );
 					tg.setDishBikou(rset.getString( "DishBikou" ) );
+					
 					list.add( tg );
 
 				}
