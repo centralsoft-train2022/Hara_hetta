@@ -12,7 +12,19 @@ public class UserDao
 
 	private Connection con;
 
-	private static final String SELECT_USER_SQL2 = "SELECT UserID ,Password FROM user WHERE UserID=? AND Password=?";
+	private static final String SELECT_USER_SQL2 = "SELECT "
+	        + "UserID ,"
+	        + "Password "
+	        + "FROM"
+	        + " user "
+	        + "WHERE"
+	        + " UserID"
+	        + "="
+	        + "?"
+	        + " AND "
+	        + "Password"
+	        + "="
+	        + "?";
 
 	public UserDao( Connection con )
 	{
@@ -20,50 +32,12 @@ public class UserDao
 		this.con = con;
 	}
 
-	private static void allClose( PreparedStatement statement, Connection connection )
-	{
-
-		if( statement != null )
-		{
-
-			try
-			{
-				statement.close( );
-			}
-			catch( SQLException e )
-			{
-				e.printStackTrace( );
-			}
-		}
-
-		if( connection != null )
-		{
-
-			try
-			{
-				connection.close( );
-			}
-			catch( SQLException e )
-			{
-				e.printStackTrace( );
-			}
-		}
-
-	}
-
-	static Connection			connection;
-	static PreparedStatement	statement	= null;
-
 	public LoginBean findUser( int UserID, String Password )
 	{
 		LoginBean user = new LoginBean( );
 
-		try
+		try( PreparedStatement statement = this.con.prepareStatement( SELECT_USER_SQL2 ) )
 		{
-			DBUtil utl = new DBUtil( );
-			connection = utl.getConnection( );
-
-			statement = connection.prepareStatement( SELECT_USER_SQL2 );
 			statement.setInt( 1, UserID );
 			statement.setString( 2, Password );
 
@@ -82,10 +56,7 @@ public class UserDao
 		{
 			e.printStackTrace( );
 		}
-		finally
-		{
-			allClose( statement, connection );
-		}
+
 		return user;
 
 	}
