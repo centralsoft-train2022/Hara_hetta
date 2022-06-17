@@ -13,7 +13,7 @@
 <body>
 	主食を入力してください
 
-	<form method="POST" action="registeredMainServlet">
+	<form method="POST" action="RegisteredMainServlet">
 	<p>
 		朝：<input type="text" name="morningdishname">
 	</p>

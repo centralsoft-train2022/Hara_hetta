@@ -18,7 +18,7 @@ import dao.DishsaveDao;
 
 @WebServlet("/registeredMainServlet")
 
-public class registeredMainServlet extends HttpServlet
+public class RegisteredMainServlet extends HttpServlet
 {
 	List<Integer>	morningList	= new ArrayList<Integer>( );
 	List<Integer>	noonList	= new ArrayList<Integer>( );
