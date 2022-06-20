@@ -70,6 +70,7 @@ public class RegisteredMainServlet extends HttpServlet
 		if( morning1Int != 0 )
 		{
 			morningList.add( morning1Int );
+
 		}
 
 		if( morning2Int != 0 )
