@@ -17,62 +17,77 @@ import dao.DBUtil;
 import dao.TagAddDao;
 
 @WebServlet("/TagAddServlet")
-public class TagAddServlet extends HttpServlet {
+public class TagAddServlet extends HttpServlet
+{
 	protected void doPost(
-			HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	        HttpServletRequest request,
+	        HttpServletResponse response
+	) throws ServletException, IOException
+	{
 
 		// 画面から入力したデータを取得する
-		request.setCharacterEncoding("UTF-8");
-		String tnStr = request.getParameter("tag");
-		String stKikanStr = request.getParameter("radiobutton");
-		String stCountStr = request.getParameter("cnt");
+		request.setCharacterEncoding( "UTF-8" );
+		String	tnStr		= request.getParameter( "tag" );
+		String	stKikanStr	= request.getParameter( "radiobutton" );
+		String	stCountStr	= request.getParameter( "cnt" );
 
-		int stKikan = Integer.parseInt(stKikanStr);
-		int stCount = Integer.parseInt(stCountStr);
+		int	stKikan	= Integer.parseInt( stKikanStr );
+		int	stCount	= Integer.parseInt( stCountStr );
 
 		// セッションに保存
-		HttpSession session = request.getSession();
-		session.setAttribute("TagName", tnStr);
-		session.setAttribute("WarningSetting", stKikan);
-		session.setAttribute("WarningCount", stCount);
+		HttpSession session = request.getSession( );
+		session.setAttribute( "TagName", tnStr );
+		session.setAttribute( "WarningSetting", stKikan );
+		session.setAttribute( "WarningCount", stCount );
 
-		//セッションのObject型からint型への変換
-		int wstKikan = (Integer) session.getAttribute("WarningSetting");
-		int wstCount = (Integer) session.getAttribute("WarningCount");
+		// セッションのObject型からint型への変換
+		int	wstKikan	= (Integer) session.getAttribute( "WarningSetting" );
+		int	wstCount	= (Integer) session.getAttribute( "WarningCount" );
 
-		//LoginServletのセッションからuserIDを取得
-		int uid = (Integer) session.getAttribute("UserID");
-		System.out.println(uid);
+		// LoginServletのセッションからuserIDを取得
+		int uid = (Integer) session.getAttribute( "UserID" );
+		System.out.println( uid );
 
-		insertTag(tnStr, uid, wstKikan, wstCount);
+		insertTag( tnStr, uid, wstKikan, wstCount );
 
-		//次の画面に遷移
-		RequestDispatcher disp = request.getRequestDispatcher("registeredTag.jsp");
-		disp.forward(request, response);
+		TagAddBean bean = new TagAddBean( );
+		bean.setTagName( tnStr );
+		bean.setWarningSetting( stKikan );
+		bean.setWarningCount( wstCount );
+		bean.setWarningSttingName( stCountStr );
+
+		request.setAttribute( "bean", bean );
+
+		// 次の画面に遷移
+		RequestDispatcher disp = request.getRequestDispatcher( "registeredTag.jsp" );
+		disp.forward( request, response );
 	}
 
-	//Cnnection取得
-	private void insertTag(String tnStr, int uid, int stKikan, int stCount) {
-		DBUtil db = new DBUtil();
+	// Cnnection取得
+	private void insertTag( String tnStr, int uid, int stKikan, int stCount )
+	{
+		DBUtil db = new DBUtil( );
 
-		try (Connection con = db.getConnection()) {
+		try( Connection con = db.getConnection( ) )
+		{
 
-			TagAddDao tad = new TagAddDao(con);
+			TagAddDao tad = new TagAddDao( con );
 
-			//Beanに保存
-			TagAddBean bean = new TagAddBean();
-			bean.setTagName(tnStr);
-			bean.setWarningSetting(stKikan);
-			bean.setWarningCount(stCount);
+			// Beanに保存
+			TagAddBean bean = new TagAddBean( );
+			bean.setTagName( tnStr );
+			bean.setWarningSetting( stKikan );
+			bean.setWarningCount( stCount );
 
-			//3種類のSQL実行しているメソッドのそれぞれを呼び出し
-			tad.insertTagName(bean.getTagName());
-			int tgidget = tad.getTagID();
-			tad.insertTagSetting(bean.getWarningSetting(), bean.getWarningCount(), uid, tgidget);
+			// 3種類のSQL実行しているメソッドのそれぞれを呼び出し
+			tad.insertTagName( bean.getTagName( ) );
+			int tgidget = tad.getTagID( );
+			tad.insertTagSetting( bean.getWarningSetting( ), bean.getWarningCount( ), uid, tgidget );
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
+		}
+		catch( SQLException e )
+		{
+			throw new RuntimeException( e );
 		}
 	}
 }
