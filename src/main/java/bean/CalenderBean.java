@@ -6,44 +6,59 @@ import java.util.List;
 
 import dao.CalenderVo;
 
-public class CalenderBean {
-	
-	private Date DishDate;
-	private String Dishname;
-	private String bikou;
+public class CalenderBean
+{
 
-	
-	public Date getDishDate() {
-		return DishDate;
-	}
+	private String	DishName;
+	private String	Bikou;
+	private int		ToDayDish;
 
-	public void setDishDate(Date dishDate) {
-		DishDate = dishDate;
-	}
-
-	public String getDishname() {
-		return Dishname;
-	}
-
-	public void setDishname(String dishname) {
-		Dishname = dishname;
-	}
-
-	public String getBikou() {
-		return bikou;
-	}
-
-	public void setBikou(String bikou) {
-		this.bikou = bikou;
-	}
 
 	private List<CalenderVo> dishList = new ArrayList<CalenderVo>( );
 
-	public List<CalenderVo> getDishList() {
+	public List<CalenderVo> getDishList()
+	{
 		return dishList;
 	}
 
-	public void setDishList(List<CalenderVo> dishList) {
+	public void setDishList( List<CalenderVo> dishList )
+	{
 		this.dishList = dishList;
+	}
+
+	public String getDishName()
+	{
+
+		return DishName;
+	}
+
+	public void setDishName( String dishName )
+	{
+
+		DishName = dishName;
+	}
+
+	public String getBikou()
+	{
+
+		return Bikou;
+	}
+
+	public void setBikou( String bikou )
+	{
+
+		Bikou = bikou;
+	}
+
+	public int getToDayDish()
+	{
+
+		return ToDayDish;
+	}
+
+	public void setToDayDish( int toDayDish )
+	{
+
+		ToDayDish = toDayDish;
 	}
 }
