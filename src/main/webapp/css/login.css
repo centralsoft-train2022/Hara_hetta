@@ -3,6 +3,7 @@
 body {
 	background-image: url("login3.jpg");
 	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .content {
