@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.DBUtil;
 import dao.DishsaveDao;
 
-@WebServlet("/registeredMainServlet")
+@WebServlet("/RegisteredMainServlet")
 
 public class RegisteredMainServlet extends HttpServlet
 {
