@@ -1,9 +1,9 @@
 @charset "UTF-8";
 
 body {
-	background-image: url("おにぎり.jpg");
+	background-image: url("ちいかわ.jpg");
+	background-size: cover;
 	background-repeat: no-repeat;
-	background-position:50% 15%;
 	
 }
 
@@ -15,7 +15,7 @@ body {
 	left: 0;
 	margin: auto;
 	width: 260px;
-	height: 150px;
+	height: 650px;
 }
 
 

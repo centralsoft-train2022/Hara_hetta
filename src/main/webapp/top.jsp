@@ -13,6 +13,8 @@
 		
 		おはようございます。
 		</b></font>
+		<br>
+		<br>
 	
 		<form  method="POST" action="CalendarServlet">
 		<input type="submit" value="カレンダー表示"  style="width:150px;height:50px;background-color:#FFFFBB" >
