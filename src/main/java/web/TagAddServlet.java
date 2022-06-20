@@ -52,7 +52,7 @@ public class TagAddServlet extends HttpServlet {
 		disp.forward(request, response);
 	}
 
-	//Cnnection取得して、3種類のSQL実行しているメソッドのそれぞれを呼び出し
+	//Cnnection取得
 	private void insertTag(String tnStr, int uid, int stKikan, int stCount) {
 		DBUtil db = new DBUtil();
 
@@ -66,6 +66,7 @@ public class TagAddServlet extends HttpServlet {
 			bean.setWarningSetting(stKikan);
 			bean.setWarningCount(stCount);
 
+			//3種類のSQL実行しているメソッドのそれぞれを呼び出し
 			tad.insertTagName(bean.getTagName());
 			int tgidget = tad.getTagID();
 			tad.insertTagSetting(bean.getWarningSetting(), bean.getWarningCount(), uid, tgidget);
