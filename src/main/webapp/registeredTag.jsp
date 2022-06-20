@@ -12,7 +12,7 @@
 		追加完了しました✓<br><br>
 		
 		追加したタグ名：<%=bean.getTagName(  ) %><br><br>
-		警告設定：<%=bean.getWarningSttingName(  ) %>の間<br>
+		警告設定：<%=bean.getWarningSetingName(  ) %>の間<br>
 	  	　　　　　<%=bean.getWarningCount(  ) %>回食べた場合<br><br>
 	  	
 	  	警告します

@@ -54,7 +54,7 @@ public class TagAddServlet extends HttpServlet
 		bean.setTagName( tnStr );
 		bean.setWarningSetting( stKikan );
 		bean.setWarningCount( wstCount );
-		bean.setWarningSttingName( stCountStr );
+		bean.setWarningSetingName( stCountStr );
 
 		request.setAttribute( "bean", bean );
 

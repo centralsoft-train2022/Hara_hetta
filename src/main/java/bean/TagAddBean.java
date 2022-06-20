@@ -6,7 +6,7 @@ public class TagAddBean
 	private String	TagName;
 	private int		WarningSetting;
 	private int		WarningCount;
-	private String	WarningSttingName;
+	private String	WarningSetingName;
 
 	public TagAddBean()
 	{
@@ -43,26 +43,26 @@ public class TagAddBean
 		WarningCount = warningCount;
 	}
 
-	public String getWarningSttingName()
+	public String getWarningSetingName()
 	{
 
-		return WarningSttingName;
+		return WarningSetingName;
 	}
 
-	public void setWarningSttingName( String warningSttingName )
+	public void setWarningSetingName( String warningSetingName )
 	{
 		int i = getWarningSetting( );
 
 		switch (i)
 		{
 			case 1:
-				WarningSttingName = "1週間";
+				WarningSetingName = "1週間";
 				break;
 			case 2:
-				WarningSttingName = "2週間";
+				WarningSetingName = "2週間";
 				break;
 			case 3:
-				WarningSttingName = "1ヵ月";
+				WarningSetingName = "1ヵ月";
 				break;
 		}
 	}
