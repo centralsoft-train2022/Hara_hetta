@@ -1,6 +1,7 @@
 package bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dao.CalenderVo;
@@ -11,6 +12,7 @@ public class CalenderBean
 	private String	DishName;
 	private String	Bikou;
 	private int		ToDayDish;
+
 
 	private List<CalenderVo> dishList = new ArrayList<CalenderVo>( );
 
