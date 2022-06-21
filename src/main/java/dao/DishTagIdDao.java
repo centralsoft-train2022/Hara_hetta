@@ -53,7 +53,7 @@ public class DishTagIdDao
 					tgAll.setTag_TagID( rset.getInt( "maindish.Tag_TagID" ) );
 					tgAll.setTagCount( rset.getInt( "count(*)" ) );
 					tgAll.setTagName( rset.getString( "TagName" ) );
-					// System.out.println( tgAll.getTag_TagID( ) );
+					
 					tgAllList.add( tgAll );
 
 				}
