@@ -21,15 +21,18 @@ import dao.DishsaveDao;
 
 public class RegisteredMainServlet extends HttpServlet
 {
-	List<Integer>	morningList	= new ArrayList<Integer>( );
-	List<Integer>	noonList	= new ArrayList<Integer>( );
-	List<Integer>	nightList	= new ArrayList<Integer>( );
+//	List<Integer>	morningList	= new ArrayList<Integer>( );
+//	List<Integer>	noonList	= new ArrayList<Integer>( );
+//	List<Integer>	nightList	= new ArrayList<Integer>( );
 
 	protected void doPost(
 	        HttpServletRequest request,
 	        HttpServletResponse response
 	) throws ServletException, IOException
 	{
+		List<Integer>	morningList	= new ArrayList<Integer>( );
+		List<Integer>	noonList	= new ArrayList<Integer>( );
+		List<Integer>	nightList	= new ArrayList<Integer>( );
 
 		// 画面から入力したデータを取得する
 		// String dishDateStr = request.getParameter( "dishdate" );
@@ -122,7 +125,125 @@ public class RegisteredMainServlet extends HttpServlet
 			nightList.add( night3Int );
 		}
 
-		savetag( morningdishName, noondishName, nightdishName, bikou );
+		savetag( morningDishNames, noonDishNames, nightDishNames, bikou, morningList, noonList, nightList );
+
+		RegisteredMainBean bean = this.setUpBean( morningDishNames, noonDishNames, nightDishNames, bikou );
+
+		request.setAttribute( "bean", bean );
+
+		// JSPに遷移する
+		RequestDispatcher disp = request.getRequestDispatcher( "/registeredMain.jsp" );
+		disp.forward( request, response );
+	}
+
+	// 入力した食べ物をDBに保存
+	private void savetag(
+	        String[] morningDishNames, String[] noonDishNames, String[] nightDishNames, String bikou,
+	        List<Integer> morningList, List<Integer> noonList, List<Integer> nightList
+	)
+	{
+
+		DBUtil db = new DBUtil( );
+
+		try( Connection c = db.getConnection( ) )
+		{
+
+			DishsaveDao dishdao = new DishsaveDao( c );
+
+			int	size	= morningDishNames.length;
+			int	asa		= 1;
+
+			switch (size)
+			{
+				case 0:
+
+					break;
+				case 1:
+					if( !morningDishNames[0].equals( "" ) )
+					{
+						dishdao.DishInsert( morningDishNames[0], morningList.get( 0 ), asa, bikou );
+					}
+					break;
+				case 2:
+
+					dishdao.DishInsert( morningDishNames[0], morningList.get( 0 ), asa, bikou );
+					dishdao.DishInsert( morningDishNames[1], morningList.get( 1 ), asa, bikou );
+					break;
+				case 3:
+					dishdao.DishInsert( morningDishNames[0], morningList.get( 0 ), asa, bikou );
+					dishdao.DishInsert( morningDishNames[1], morningList.get( 1 ), asa, bikou );
+					dishdao.DishInsert( morningDishNames[2], morningList.get( 2 ), asa, bikou );
+					break;
+
+			}
+
+			size = noonDishNames.length;
+			int hiru = 2;
+
+			switch (size)
+			{
+				case 0:
+
+					break;
+				case 1:
+					if( !noonDishNames[0].equals( "" ) )
+					{
+						dishdao.DishInsert( noonDishNames[0], noonList.get( 0 ), hiru, bikou );
+					}
+
+					break;
+				case 2:
+					dishdao.DishInsert( noonDishNames[0], noonList.get( 0 ), hiru, bikou );
+					dishdao.DishInsert( noonDishNames[1], noonList.get( 1 ), hiru, bikou );
+					break;
+				case 3:
+					dishdao.DishInsert( noonDishNames[0], noonList.get( 0 ), hiru, bikou );
+					dishdao.DishInsert( noonDishNames[1], noonList.get( 1 ), hiru, bikou );
+					dishdao.DishInsert( noonDishNames[2], noonList.get( 2 ), hiru, bikou );
+					break;
+
+			}
+
+			size = nightDishNames.length;
+			int yoru = 3;
+
+			switch (size)
+			{
+				case 0:
+
+					break;
+				case 1:
+					if( !nightDishNames[0].equals( "" ) )
+					{
+						dishdao.DishInsert( nightDishNames[0], nightList.get( 0 ), yoru, bikou );
+					}
+
+					break;
+				case 2:
+					dishdao.DishInsert( nightDishNames[0], nightList.get( 0 ), yoru, bikou );
+					dishdao.DishInsert( nightDishNames[1], nightList.get( 1 ), yoru, bikou );
+					break;
+				case 3:
+					dishdao.DishInsert( nightDishNames[0], nightList.get( 0 ), yoru, bikou );
+					dishdao.DishInsert( nightDishNames[1], nightList.get( 1 ), yoru, bikou );
+					dishdao.DishInsert( nightDishNames[2], nightList.get( 2 ), yoru, bikou );
+					break;
+
+			}
+
+			c.commit( );
+		}
+		catch( SQLException e )
+		{
+			e.printStackTrace( );
+		}
+
+	}
+
+	private RegisteredMainBean setUpBean(
+	        String[] morningDishNames, String[] noonDishNames, String[] nightDishNames, String bikou
+	)
+	{
 
 		RegisteredMainBean bean = new RegisteredMainBean( );
 
@@ -214,60 +335,7 @@ public class RegisteredMainServlet extends HttpServlet
 
 		bean.setBikou( bikou );
 
-		request.setAttribute( "bean", bean );
-
-		// JSPに遷移する
-		RequestDispatcher disp = request.getRequestDispatcher( "/registeredMain.jsp" );
-		disp.forward( request, response );
-	}
-
-	// 入力した食べ物をDBに保存
-	private void savetag( String morningdishName, String noondishName, String nightdishName, String bikou )
-	{
-
-		DBUtil db = new DBUtil( );
-
-		try( Connection c = db.getConnection( ) )
-		{
-
-			DishsaveDao dishdao = new DishsaveDao( c );
-
-			if( !morningdishName.equals( "" ) )
-			{
-
-				for( int i = 0; i < morningList.size( ); i++ )
-				{
-					int asa = 1;
-					dishdao.DishInsert( morningdishName, morningList.get( i ), asa, bikou );
-				}
-
-			}
-
-			if( !noondishName.equals( "" ) )
-			{
-
-				for( int i = 0; i < noonList.size( ); i++ )
-				{
-					int hiru = 2;
-					dishdao.DishInsert( noondishName, noonList.get( i ), hiru, bikou );
-				}
-			}
-
-			if( !nightdishName.equals( "" ) )
-			{
-
-				for( int i = 0; i < nightList.size( ); i++ )
-				{
-					int yoru = 3;
-					dishdao.DishInsert( nightdishName, nightList.get( i ), yoru, bikou );
-				}
-			}
-			c.commit( );
-		}
-		catch( SQLException e )
-		{
-			e.printStackTrace( );
-		}
+		return bean;
 
 	}
 
