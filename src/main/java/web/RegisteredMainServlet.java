@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.RegisteredMainBean;
 import dao.DBUtil;
 import dao.DishsaveDao;
 
@@ -33,9 +34,17 @@ public class RegisteredMainServlet extends HttpServlet
 		// 画面から入力したデータを取得する
 		// String dishDateStr = request.getParameter( "dishdate" );
 		request.setCharacterEncoding( "UTF-8" );
-		String	morningdishName	= request.getParameter( "morningdishname" );
-		String	noondishName	= request.getParameter( "noondishname" );
-		String	nightdishName	= request.getParameter( "nightdishname" );
+		String morningdishName = request.getParameter( "morningdishname" );
+
+		String[] morningDishNames = morningdishName.split( "," );
+
+		String noondishName = request.getParameter( "noondishname" );
+
+		String[] noonDishNames = noondishName.split( "," );
+
+		String nightdishName = request.getParameter( "nightdishname" );
+
+		String[] nightDishNames = nightdishName.split( "," );
 
 		String bikou = request.getParameter( "bikou" );
 		// カンマごとに食べ物をリストにいれる
@@ -114,6 +123,98 @@ public class RegisteredMainServlet extends HttpServlet
 		}
 
 		savetag( morningdishName, noondishName, nightdishName, bikou );
+
+		RegisteredMainBean bean = new RegisteredMainBean( );
+
+		int size = morningDishNames.length;
+
+		switch (size)
+		{
+			case 0:
+				bean.setMorningDishName1( "" );
+				bean.setMorningDishName2( "" );
+				bean.setMorningDishName3( "" );
+				break;
+			case 1:
+				bean.setMorningDishName1( morningDishNames[0] );
+				bean.setMorningDishName2( "" );
+				bean.setMorningDishName3( "" );
+				break;
+			case 2:
+				bean.setMorningDishName1( morningDishNames[0] );
+				bean.setMorningDishName2( morningDishNames[1] );
+				bean.setMorningDishName3( "" );
+				break;
+			case 3:
+				bean.setMorningDishName1( morningDishNames[0] );
+				bean.setMorningDishName2( morningDishNames[1] );
+				bean.setMorningDishName3( morningDishNames[2] );
+				break;
+
+		}
+
+		size = noonDishNames.length;
+
+		switch (size)
+		{
+			case 0:
+				bean.setNoonDishName1( "" );
+				bean.setNoonDishName1( "" );
+				bean.setNoonDishName1( "" );
+				break;
+			case 1:
+				bean.setNoonDishName1( noonDishNames[0] );
+				bean.setNoonDishName2( "" );
+				bean.setNoonDishName3( "" );
+				break;
+			case 2:
+				bean.setNoonDishName1( noonDishNames[0] );
+				bean.setNoonDishName2( noonDishNames[1] );
+				bean.setNoonDishName3( "" );
+				break;
+			case 3:
+				bean.setNoonDishName1( noonDishNames[0] );
+				bean.setNoonDishName2( noonDishNames[1] );
+				bean.setNoonDishName3( noonDishNames[2] );
+				break;
+
+		}
+
+		size = nightDishNames.length;
+
+		switch (size)
+		{
+			case 0:
+				bean.setNightDishName1( "" );
+				bean.setNightDishName2( "" );
+				bean.setNightDishName3( "" );
+
+				break;
+			case 1:
+				bean.setNightDishName1( nightDishNames[0] );
+				bean.setNightDishName2( "" );
+				bean.setNightDishName3( "" );
+
+				break;
+			case 2:
+				bean.setNightDishName1( nightDishNames[0] );
+				bean.setNightDishName2( nightDishNames[1] );
+				bean.setNightDishName3( "" );
+
+				break;
+			case 3:
+
+				bean.setNightDishName1( nightDishNames[0] );
+				bean.setNightDishName2( nightDishNames[1] );
+				bean.setNightDishName3( nightDishNames[2] );
+
+				break;
+
+		}
+
+		bean.setBikou( bikou );
+
+		request.setAttribute( "bean", bean );
 
 		// JSPに遷移する
 		RequestDispatcher disp = request.getRequestDispatcher( "/registeredMain.jsp" );
