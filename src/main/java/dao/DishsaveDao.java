@@ -89,7 +89,7 @@ public class DishsaveDao
 			calendar.setDishName( resultSet.getString( "DishName" ) );
 			calendar.setBikou( resultSet.getString( "DishBikou" ) );
 			calendar.setToDayDish( resultSet.getInt( "MorningDayNightDivide" ) );
-
+			
 		}
 		catch( SQLException e )
 		{
