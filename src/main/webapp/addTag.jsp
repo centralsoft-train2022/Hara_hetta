@@ -17,10 +17,22 @@
 			font-size:40px;
 		}
 		div{
-			padding-right:190px;
+			padding-right:10px;
 		}
 		p2{
 			color:#f89174
+		}
+		table{
+			margin-left:auto;
+			margin-right:auto;
+		}
+		.tuika{
+		width:150px;
+		padding:10px;
+		}
+		.touroku{
+		width:150px;
+		padding:10px;
 		}
 		
 		</style>
@@ -33,28 +45,30 @@
 		<input name="tag" type="text" ><br>
 		
 		<br>
-		
-		<div><p2><b>警告設定<br></b></p2>
-
-   	 	<input type="radio" name="radiobutton" value="1"> 1週間<br>
-   		 <input type="radio" name="radiobutton" value="2"> 2週間<br>
-   		 <input type="radio" name="radiobutton" value="3"> 1ヵ月<br></div>
-   		 
+	<table>
+	   <tr>
+	   		<td>
+			   <div><p2><b>警告設定<br></b></p2>
+		   	 	 <input type="radio" name="radiobutton" value="1"> 1週間<br>
+		   		 <input type="radio" name="radiobutton" value="2"> 2週間<br>
+		   		 <input type="radio" name="radiobutton" value="3"> 1ヵ月<br></div>
+	   	   	</td>
+   	   		<td>&nbsp;</td>
+   	   		<td><img src="ちいかわ料理長.png" width="200"></td>
+   	   		
+   	   </tr>
+   	</table>
    		 <br>
    		 
    		 に<input name="cnt" type="text" size="2">回食べたら警告します🔔<br>
-   		 <input type="submit" value="登録">
+   		 <input type="submit" value="登録" class="touroku">
 		</form>	
 		
 		<br>
 		
 		
-			
-		
-		<br>
-		
 		<form  method="GET" action="MaindishServlet">
-		<input type="submit" value="追加に戻る">
+		<input type="submit" value="追加に戻る" class="tuika">
 		</form>	
 		
 

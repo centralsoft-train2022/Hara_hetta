@@ -39,9 +39,9 @@ public class CalenderDao {
 				return null;
 			}
 
-//			bean.setDishDate(resultSet.getDate("didate"));
-//			bean.setDishname(resultSet.getString("diname"));
-//			bean.setBikou(resultSet.getString("dibiko"));
+			//			bean.setDishDate(resultSet.getDate("didate"));
+			//			bean.setDishname(resultSet.getString("diname"));
+			//			bean.setBikou(resultSet.getString("dibiko"));
 			//	public List<CalenderVo> getTag() throws SQLException
 			//	{
 			//
