@@ -9,11 +9,38 @@
 <meta charset="UTF-8">
 
 <title>追加・変更画面</title>
+
+<style>
+		body{
+			color:gray;
+			text-align: center;
+			background-color: #fffbf4; 
+			margin-top:100px;
+			font-size:30px;
+			
+			
+		}
+		p1{
+			font-size:40px;
+		}
+		
+		
+		table{
+			margin-left:auto;
+			margin-right:250px;
+		}
+		
+</style>
+
 </head>
 <body>
-	主食を入力してください
+	<p1><b>主食を入力してください。</b></p1><br>
 
 	<form method="POST" action="RegisteredMainServlet">
+	
+	<table>
+		<tr>
+			<td>
 	<p>
 		朝：<input type="text" name="morningdishname">
 	</p>
@@ -90,6 +117,13 @@
 	</select>
 	<br>
 	<br>
+	</td>
+		 	<td>&nbsp;</td>
+		 		
+		<td> <img src="シュー.png" width="400"></td>
+		
+		</tr>
+		</table>
 	<p>
 		備考：<input type="text" name="bikou">
 	</p>
@@ -99,14 +133,18 @@
 
 	
 	<div style="display:inline-flex">
-</div>
-		<input type="submit" value="追加">
+
+		<input type="submit" value="追加" style="width:150px;height:60px;background-color:#FFFFBB">
 	</form>
 	
 	 <form method="POST" action="addTag.jsp">
-		 <input type="submit"value="タグ追加">
+		 <input type="submit"value="タグ追加" style="width:150px;height:60px;background-color:#FFFFBB">
 	</form>
 	
+	 <form method="POST" action="calendar.jsp">
+		 <input type="submit"value="戻る" style="width:150px;height:60px;background-color:#FFFFBB">
+	</form>
+	</div>
 
 
 
