@@ -22,6 +22,16 @@
 		p3{
 			font-size:35px;
 		}
+		.nyuryoku{
+			width:150px;
+			height:60px;
+			background-color:#FFFFBB;
+		}
+		.modoru{
+			width:150px;
+			height:60px;
+			background-color:#FFFFBB;
+		}
 		
 		</style>
 <body>
@@ -32,19 +42,19 @@
 		＜警告設定＞<br><p3><%=bean.getWarningSetingName(  ) %>の間</p3><br>
 	  	<p3><%=bean.getWarningCount(  ) %>回食べた場合</p3><br><br>
 	  	
-	  	警告します
+	  	警告します<br><br>
 		
-	
-		<form  method="GET" action="MaindishServlet">
-		<input type="submit" value="入力に戻る" class="nyuryoku">
-		</form>	
-		
-		<form  method="POST" action="addTag.jsp">
-		<input type="submit" value="タグ登録に戻る" class="modoru"><br>
+		<div style="display:inline-flex">
+			<form  method="GET" action="MaindishServlet">
+			<input type="submit" value="入力に戻る" class="nyuryoku">
+			</form>
+
+			<form  method="POST" action="addTag.jsp">
+			<input type="submit" value="タグ登録に戻る" class="modoru"><br>
+			</form>
+		</div><br><br>
 		<img src="ちいかわいや.png" width="200">
-		</form>	
-		
-		
+
 
 </body>
 </html>
