@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,14 +18,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.CalenderBean;
+import bean.WarningBean;
 import dao.DBUtil;
 import dao.DishVo;
 import dao.DishsaveDao;
+import dao.WarningDao;
+import dao.WarningVo;
 
 @WebServlet("/CalendarServlet")
 public class CalendarServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+    
+    	WarningBean bean = new WarningBean( );
+		bean.setWarningList( getWarning( ) );
+		request.setAttribute( "bean", bean );
 
 		List<DishVo> list = sql();
 
@@ -79,8 +87,24 @@ public class CalendarServlet extends HttpServlet {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+    
+  private List<WarningVo> getWarning()
+	{
 
-		return dishList;
+		DBUtil db = new DBUtil( );
+
+		try( Connection c = db.getConnection( ) )
+		{
+			WarningDao		warningdao	= new WarningDao( c );
+			List<WarningVo>	WarningList	= warningdao.getWarning( );
+
+			return WarningList;
+		}
+		catch( SQLException e )
+		{
+			throw new RuntimeException( e );
+		}
+
 	}
-
 }
+

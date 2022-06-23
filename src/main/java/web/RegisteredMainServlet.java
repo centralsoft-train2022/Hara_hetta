@@ -125,6 +125,12 @@ public class RegisteredMainServlet extends HttpServlet
 			nightList.add( night3Int );
 		}
 
+//		HttpSession session = request.getSession( );
+//		session.setAttribute( "morningdishname", morningdishName );
+//		session.setAttribute( "noondishname", noondishName );
+//		session.setAttribute( "nightdishname", nightdishName );
+//		session.setAttribute( "bikou", bikou );
+
 		savetag( morningDishNames, noonDishNames, nightDishNames, bikou, morningList, noonList, nightList );
 
 		RegisteredMainBean bean = this.setUpBean( morningDishNames, noonDishNames, nightDishNames, bikou );
