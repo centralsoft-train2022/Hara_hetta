@@ -27,12 +27,14 @@
 			margin-right:auto;
 		}
 		.tuika{
-		width:150px;
-		padding:10px;
+			width:150px;
+			height:60px;
+			background-color:#FFFFBB;
 		}
 		.touroku{
-		width:150px;
-		padding:10px;
+			width:150px;
+			height:60px;
+			background-color:#FFFFBB;
 		}
 		
 		</style>
@@ -60,17 +62,20 @@
    	</table>
    		 <br>
    		 
-   		 に<input name="cnt" type="text" size="2">回食べたら警告します🔔<br>
-   		 <input type="submit" value="登録" class="touroku">
-		</form>	
-		
-		<br>
-		
-		
-		<form  method="GET" action="MaindishServlet">
-		<input type="submit" value="追加に戻る" class="tuika">
-		</form>	
-		
+   		 に<input name="cnt" type="text" size="2">回食べたら警告します🔔<br><br>
+   		 
+   		 <div style="display:inline-flex">
+	   		 <input type="submit" value="登録" class="touroku">
+			</form>	
+			
+			<br>
+			
+			
+			<form  method="GET" action="MaindishServlet">
+			<input type="submit" value="追加に戻る" class="tuika">
+			</form>	
+		 </div>
+			
 
 </body>
 </html>
