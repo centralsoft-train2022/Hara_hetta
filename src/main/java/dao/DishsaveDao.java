@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DishsaveDao {
 
@@ -33,7 +35,7 @@ public class DishsaveDao {
 
 	private static final String SELECT_DISH_SQL = "SELECT\n"
 			+ "DishName\n"
-			+ ",DishBikou\n"
+//			+ ",DishBikou\n"
 			+ ",DishDate\n"
 			+ "FROM\n"
 			+ "maindish\n";
@@ -66,31 +68,29 @@ public class DishsaveDao {
 
 	}
 
-	public DishVo getDish() {
-		//CalenderBean calendar = new CalenderBean();
-
-		DishVo dishVo = new DishVo();
+	public List<DishVo> getDish() {
+		
+		List<DishVo> list = new ArrayList<DishVo>();
+		
 		try (PreparedStatement stmt = this.con.prepareStatement(SELECT_DISH_SQL)) {
+			
+			
+			try(ResultSet rset = stmt.executeQuery();) {
+				
+				while(rset.next()) {
+					DishVo dish =  new DishVo();
+					dish.setDishName(rset.getString(1));
+					dish.setDishDate(rset.getDate(2));
+					
+					list.add(dish);
 
-			ResultSet resultSet = stmt.executeQuery();
-			resultSet.next();
+				}
 
-			dishVo.setDishName(resultSet.getString("DishName"));
-			dishVo.setDishBikou(resultSet.getString("DishBikou"));
-			dishVo.setDishDate(resultSet.getDate("DishDate"));
-
-			//dishVo.setToDayDish(resultSet.getInt("MorningDayNightDivide"));
-			//System.out.println(resultSet.getString("DishName"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//		String getdn = dishVo.getDishName();
-		//		String getdb = dishVo.getDishBikou();
-		//		Date getdd = dishVo.getDishDate();
-
-		//System.out.println(getdn);
-
-		return dishVo;
+		return list;
 
 	}
 

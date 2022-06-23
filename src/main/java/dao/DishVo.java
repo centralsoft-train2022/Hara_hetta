@@ -9,13 +9,16 @@ public class DishVo implements Serializable
 	public static final String TABLE = "MAINDISH";
 
 	private int				DishID;
-	private java.sql.Date	DishDate;
+	private Date DishDate;
 	private String			DishName;
 	private String			DishBikou;
 	private int				User_UserID;
 	private int				Tag_TagID;
 	private int				TagCount;
 	private String			TagName;
+
+	
+	
 
 	public String getTagName()
 	{
@@ -45,8 +48,8 @@ public class DishVo implements Serializable
 	public DishVo( Date dishDate, String dishName )
 	{
 		super( );
-		DishDate	= dishDate;
-		DishName	= dishName;
+		this.DishDate	= dishDate;
+		this.DishName	= dishName;
 	}
 
 	public int getDishID()
@@ -61,22 +64,22 @@ public class DishVo implements Serializable
 
 	public java.sql.Date getDishDate()
 	{
-		return DishDate;
+		return this.DishDate;
 	}
 
 	public void setDishDate( java.sql.Date dishDate )
 	{
-		DishDate = dishDate;
+		this.DishDate = dishDate;
 	}
 
 	public String getDishName()
 	{
-		return DishName;
+		return this.DishName;
 	}
 
 	public void setDishName( String dishName )
 	{
-		DishName = dishName;
+		this.DishName = dishName;
 	}
 
 	public String getDishBikou()
@@ -107,6 +110,13 @@ public class DishVo implements Serializable
 	public void setTag_TagID( int tag_TagID )
 	{
 		Tag_TagID = tag_TagID;
+	}
+
+	@Override
+	public String toString() {
+		return "DishVo [DishID=" + DishID + ", DishDate=" + DishDate + ", DishName=" + DishName + ", DishBikou="
+				+ DishBikou + ", User_UserID=" + User_UserID + ", Tag_TagID=" + Tag_TagID + ", TagCount=" + TagCount
+				+ ", TagName=" + TagName + "]";
 	}
 
 }

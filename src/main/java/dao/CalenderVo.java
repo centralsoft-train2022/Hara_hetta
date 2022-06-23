@@ -24,7 +24,7 @@ public class CalenderVo {
 		return DishBikou;
 	}
 	public void setDishBikou(String dishBikou) {
-		DishBikou = dishBikou;
+//		DishBikou = dishBikou;
 	}
 	private String			DishName;
 	private String			DishBikou;

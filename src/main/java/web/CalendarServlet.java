@@ -3,6 +3,8 @@ package web;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,58 +26,69 @@ import dao.WarningDao;
 import dao.WarningVo;
 
 @WebServlet("/CalendarServlet")
-public class CalendarServlet extends HttpServlet
-{
-	protected void doPost( HttpServletRequest request, HttpServletResponse response )
-	        throws ServletException, IOException
-	{
-
-		WarningBean bean = new WarningBean( );
+public class CalendarServlet extends HttpServlet {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+    
+    	WarningBean bean = new WarningBean( );
 		bean.setWarningList( getWarning( ) );
-
 		request.setAttribute( "bean", bean );
 
-		sql( );
-		Map<String, String[]> foodName = new HashMap<String, String[]>( );
-		foodName.put( "2022-6-16", new String[]
-		{ "ラーメン", "寿司", "カレー" } );
-		foodName.put( "2022-6-17", new String[]
-		{ "塩ラーメン", "サーモン", "カツカレー" } );
-		foodName.put( "2022-6-18", new String[]
-		{ "チロル", "アルフォート", "おにぎり" } );
-		request.setAttribute( "foodName", foodName );
+		List<DishVo> list = sql();
 
-		RequestDispatcher disp = request.getRequestDispatcher( "calendar.jsp" );
-		disp.forward( request, response );
+		CalenderBean bean = new CalenderBean();
+		List<DishVo> dishList = sql();
+
+		bean.setDishList(dishList);
+
+		for (dao.DishVo vo : bean.getDishList()) {
+			bean.setDishName(vo.getDishName());
+			bean.setDishDate(vo.getDishDate());
+
+		}
+
+		Map<String, List> foodMap = new HashMap<String, List>();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-d");
+		for (DishVo dishVo : dishList) {
+			String str = formatter.format(dishVo.getDishDate());
+			List<String> foodNameList = foodMap.get(str);
+			if (foodNameList == null) {
+				foodNameList = new ArrayList<String>();
+			}
+			foodNameList.add(dishVo.getDishName());
+			foodMap.put(str, foodNameList);
+
+		}
+
+		Map<String, String[]> foodName = new HashMap<String, String[]>();
+
+		for (String key : foodMap.keySet()) {
+			List<String> foodValues = foodMap.get(key);
+			foodName.put(key, foodValues.toArray(new String[foodValues.size()]));
+		}
+
+		request.setAttribute("foodName", foodName);
+
+		RequestDispatcher disp = request.getRequestDispatcher("calendar.jsp");
+		disp.forward(request, response);
 	}
 
-	private void sql()
-	{
-		DBUtil util = new DBUtil( );
+	private static List<DishVo> sql() {
+		List<DishVo> dishList = new ArrayList<DishVo>();
 
-		Connection con = util.getConnection( );
+		DBUtil util = new DBUtil();
 
-		DishsaveDao savedao = new DishsaveDao( con );
-		// CalenderBean caBean = savedao.getDish();
-		// request.setAttribute("bean", caBean);
-		DishVo dishVo = savedao.getDish( );
+		try (Connection con = util.getConnection();) {
 
-		String	getdn	= dishVo.getDishName( );
-		String	getdb	= dishVo.getDishBikou( );
-		Date	getdd	= dishVo.getDishDate( );
+			DishsaveDao dao = new DishsaveDao(con);
 
-		CalenderBean bean = new CalenderBean( );
-		bean.setDishName( getdn );
-		bean.setBikou( getdb );
-		bean.setDishDate( getdd );
+			dishList = dao.getDish();
 
-		System.out.println( bean.getBikou( ) );
-		System.out.println( bean.getDishName( ) );
-		System.out.println( bean.getDishDate( ) );
-
-	}
-
-	private List<WarningVo> getWarning()
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+    
+  private List<WarningVo> getWarning()
 	{
 
 		DBUtil db = new DBUtil( );
@@ -94,3 +107,4 @@ public class CalendarServlet extends HttpServlet
 
 	}
 }
+

@@ -83,7 +83,12 @@ function showCalendar(month, year) {
               cell.setAttribute("data-year", year);
               cell.setAttribute("data-month_name", months[month]);
               cell.className = "date-picker";
-              cell.innerHTML = "<span>" + date + "<br>"+  foodName[year + "-" + (month+1) + "-" + date] + "</span>";
+              
+              var food = foodName[year + "-" + (month+1) + "-" + date];
+              if(typeof food == "undefined")
+                 food="";
+                 
+              cell.innerHTML = "<span>" + date + "<br>"+  food+ "</span>";
 
               if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
                   cell.className = "date-picker selected";

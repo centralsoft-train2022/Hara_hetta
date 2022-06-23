@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import dao.CalenderVo;
+import dao.DishVo;
 
 public class CalenderBean {
 
@@ -13,13 +13,13 @@ public class CalenderBean {
 	private int ToDayDish;
 	private Date DishDate;
 
-	private List<CalenderVo> dishList = new ArrayList<CalenderVo>();
+	private List<DishVo> dishList = new ArrayList<DishVo>();
 
-	public List<CalenderVo> getDishList() {
+	public List<DishVo> getDishList() {
 		return dishList;
 	}
 
-	public void setDishList(List<CalenderVo> dishList) {
+	public void setDishList(List<DishVo> dishList) {
 		this.dishList = dishList;
 	}
 
@@ -60,5 +60,7 @@ public class CalenderBean {
 	public void setDishDate(Date dishDate) {
 		DishDate = dishDate;
 	}
+	
+	
 
 }
