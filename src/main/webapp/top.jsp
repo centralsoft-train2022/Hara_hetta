@@ -9,27 +9,73 @@
 <meta charset="UTF-8">
 <title>ホーム画面</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-<!- link rel="stylesheet" href="css/top.css" -->
+
+<style>
+		body{
+			color:gray;
+			text-align: center;
+			background-color: #fffbf4; 
+			margin-top:100px;
+			font-size:35px;
+		}
+		table{
+			margin-left:auto;
+			margin-right:250px;
+		}
+		.sort{
+			position: absolute; 
+			left: 18%; 
+			top: 35%"
+		}
+		.time{
+			position: absolute; 
+			left: 22%; 
+			top: 35%"
+		}
+		
+		
+</style>
 </head>
 <body>
-		<div class ="content">
-		<font color="white" size="5"><b>
 		
-		おはようございます。
-		</b></font>
-		<br>
+		
+		<table>
+	   <tr>
+	   		<td>
+		<b>おなかすいた…てコト⁉</b>
+	
 		<br>
 	
 		<form  method="POST" action="CalendarServlet">
 		<input type="submit" value="カレンダー表示"  style="width:150px;height:50px;background-color:#FFFFBB" >
 		</form>	
-		</div>
-		
-		
+			</td>
+   	   		<td>&nbsp;</td>
+   	   		<td><img src="はらへり.png" width="295"></td>
+   	   		
+   	   </tr>
+   	</table>
+   	
+   	<form method="POST" action="login.html">
+	<select name="sort" class="sort">
+			<option value="1">昇順</option>
+			<option value="2">降順</option>	
+	</select>
+	
+	<select name="time" class="time">
+			<option value="3">朝</option>
+			<option value="4">昼</option>
+			<option value="5">夜</option>
+	</select>	
+			<input type="submit" value="表示" style="position: absolute; left: 26%; top: 29%; background-color:#FFCCCC"/>
+	</form>	
 		<script type="text/javascript"
  src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
 </script>
+		<div style="position:relative;top:100px;left:250px;width:1000px;height:500px;">
 		<canvas id="chart_cv"></canvas>
+		</div>
+		
 
 <script type="text/javascript">
   // データ --- (*1)
