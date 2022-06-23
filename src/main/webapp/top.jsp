@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>ホーム画面</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-<!- link rel="stylesheet" href="css/top.css" -->
+<!--link rel="stylesheet" href="css/top.css"-->
 </head>
 <body>
 		<div class ="content">
