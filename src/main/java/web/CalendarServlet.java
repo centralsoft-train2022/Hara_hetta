@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,10 +28,10 @@ import dao.WarningVo;
 public class CalendarServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-    
-    	WarningBean bean = new WarningBean( );
-		bean.setWarningList( getWarning( ) );
-		request.setAttribute( "bean", bean );
+
+		WarningBean bean2 = new WarningBean();
+		bean2.setWarningList(getWarning());
+		request.setAttribute("bean", bean2);
 
 		List<DishVo> list = sql();
 
@@ -87,24 +86,21 @@ public class CalendarServlet extends HttpServlet {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-    
-  private List<WarningVo> getWarning()
-	{
+		return dishList;
+	}
 
-		DBUtil db = new DBUtil( );
+	private List<WarningVo> getWarning() {
 
-		try( Connection c = db.getConnection( ) )
-		{
-			WarningDao		warningdao	= new WarningDao( c );
-			List<WarningVo>	WarningList	= warningdao.getWarning( );
+		DBUtil db = new DBUtil();
+
+		try (Connection c = db.getConnection()) {
+			WarningDao warningdao = new WarningDao(c);
+			List<WarningVo> WarningList = warningdao.getWarning();
 
 			return WarningList;
-		}
-		catch( SQLException e )
-		{
-			throw new RuntimeException( e );
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
 		}
 
 	}
 }
-
