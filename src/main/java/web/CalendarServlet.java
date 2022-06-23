@@ -83,9 +83,7 @@ public class CalendarServlet extends HttpServlet
 		try( Connection c = db.getConnection( ) )
 		{
 			WarningDao		warningdao	= new WarningDao( c );
-			List<WarningVo>	WarningList	= warningdao.getWarning1( );
-			WarningList.addAll( warningdao.getWarning2( ) );
-			WarningList.addAll( warningdao.getWarning3( ) );
+			List<WarningVo>	WarningList	= warningdao.getWarning( );
 
 			return WarningList;
 		}
