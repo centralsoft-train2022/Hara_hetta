@@ -25,12 +25,14 @@
 		.sort{
 			position: absolute; 
 			left: 18%; 
-			top: 35%"
+			top: 35%;
+			
 		}
 		.time{
 			position: absolute; 
 			left: 22%; 
-			top: 35%"
+			top: 35%;
+			
 		}
 		
 		
@@ -67,7 +69,7 @@
 			<option value="4">昼</option>
 			<option value="5">夜</option>
 	</select>	
-			<input type="submit" value="表示" style="position: absolute; left: 26%; top: 29%; background-color:#FFCCCC"/>
+			<input type="submit" value="表示" style="position: absolute; left: 26%; top: 35%; background-color:#FFCCCC"/>
 	</form>	
 		<script type="text/javascript"
  src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js">
