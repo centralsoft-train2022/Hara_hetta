@@ -27,7 +27,7 @@
 		
 		table{
 			margin-left:auto;
-			margin-right:250px;
+			margin-right:230px;
 		}
 		
 </style>
