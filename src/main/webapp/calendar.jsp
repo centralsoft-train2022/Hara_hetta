@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@page import="dao.WarningVo"%>
+    <jsp:useBean id="bean" class="bean.WarningBean" scope="request" />
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -15,6 +17,16 @@ var foodName= <%= a.writeValueAsString(request.getAttribute("foodName")) %>;
 <body>
 <body>
 	<h1 class="cauntion" >警告メッセージ</h1>	
+	<div class ="content">
+	<% for( dao.WarningVo warning:  bean.getWarningList(  )){ %>
+		<font color="black" size="5"><b>
+		[警告]
+		'<%=warning.getTagName()%>'を'<%=warning.getWarningCount()%>'回以上食べてます
+		</b></font>
+	</div>
+	<%} %>
+	
+	
 	<div class="container-calendar">
 		<h4 id="monthAndYear"></h4>
 		<div class="button-container-calendar">

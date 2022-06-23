@@ -10,6 +10,7 @@
 <title>ホーム画面</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 
+
 <style>
 		body{
 			color:gray;
@@ -37,6 +38,7 @@
 		
 		
 </style>
+
 </head>
 <body>
 		
