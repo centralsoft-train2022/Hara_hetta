@@ -26,8 +26,9 @@ public class DescAscKirikaeServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String sort = request.getParameter("sort");
+		String time = request.getParameter("time");
 		DishTagAllBean bean = new DishTagAllBean();
-		bean.setTagList(getTag_TagId(sort));
+		bean.setTagList(getTag_TagId(sort, time));
 
 		request.setAttribute("bean", bean);
 
@@ -36,13 +37,13 @@ public class DescAscKirikaeServlet extends HttpServlet {
 
 	}
 
-	private List<DishVo> getTag_TagId(String sort) {
+	private List<DishVo> getTag_TagId(String sort, String time) {
 
 		DBUtil db = new DBUtil();
 
 		try (Connection c = db.getConnection()) {
 			DishTagIdDao tgAlldao = new DishTagIdDao(c);
-			List<DishVo> tgDishAllList = tgAlldao.getDishTagId(sort);
+			List<DishVo> tgDishAllList = tgAlldao.getDishTagId(sort, time);
 
 			return tgDishAllList;
 		} catch (SQLException e) {

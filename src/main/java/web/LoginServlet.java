@@ -93,7 +93,7 @@ public class LoginServlet extends HttpServlet {
 
 		try (Connection c = db.getConnection()) {
 			DishTagIdDao tgAlldao = new DishTagIdDao(c);
-			List<DishVo> tgDishAllList = tgAlldao.getDishTagId();
+			List<DishVo> tgDishAllList = tgAlldao.getDishTagId("2", "1");
 
 			return tgDishAllList;
 		} catch (SQLException e) {
