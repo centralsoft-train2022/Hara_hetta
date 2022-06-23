@@ -12,7 +12,17 @@
 <% com.fasterxml.jackson.databind.ObjectMapper a= new com.fasterxml.jackson.databind.ObjectMapper();%>
 var foodName= <%= a.writeValueAsString(request.getAttribute("foodName")) %>;
 </script>
-
+<style>
+		body{
+			color:gray;
+			background-color: #fffbf4; 
+			}
+		table{
+			margin-left:auto;
+			margin-right:320px;
+		}	
+		
+</style>
 </head>
 <body>
 <body>
@@ -58,15 +68,27 @@ var foodName= <%= a.writeValueAsString(request.getAttribute("foodName")) %>;
 	</div>
 	<script src="js/calendar.js" type="text/javascript"></script>
 
+	
+	<table>
+	   <tr>
+	   		<td>
+	<div style="display:inline-flex">
 	<form method="GET" action="MaindishServlet">
-		<input type="submit" value="追加">
+		<input type="submit" value="追加" style="width:130px;height:50px;background-color:#FFFFBB">
 	</form>
 
 	<br>
 
 	<form method="POST" action="top.jsp">
-		<input type="submit" value="ホームに戻る">
+		<input type="submit" value="ホームに戻る" style="width:130px;height:50px;background-color:#FFFFBB">
 	</form>
+	</div>
+	</td>
+   	   		<td>&nbsp;</td>
+   	   		<td><img src="ホットケーキ.png" width="280"></td>
+   	   		
+   	   </tr>
+   	</table>
 
 
 </body>

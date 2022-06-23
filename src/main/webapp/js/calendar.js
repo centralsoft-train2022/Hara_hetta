@@ -85,7 +85,7 @@ function showCalendar(month, year) {
               cell.className = "date-picker";
               
               var food = foodName[year + "-" + (month+1) + "-" + date];
-              if(typeof food == "undefined")
+              if(typeof food === 'undefined')
                  food="";
                  
               cell.innerHTML = "<span>" + date + "<br>"+  food+ "</span>";
