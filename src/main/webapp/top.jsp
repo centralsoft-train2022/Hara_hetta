@@ -60,16 +60,16 @@
    	   </tr>
    	</table>
    	
-   	<form method="POST" action="login.html">
+   	<form method="POST" action="DescAscKirikaeServlet">
 	<select name="sort" class="sort">
 			<option value="1">昇順</option>
 			<option value="2">降順</option>	
 	</select>
 	
 	<select name="time" class="time">
-			<option value="3">朝</option>
-			<option value="4">昼</option>
-			<option value="5">夜</option>
+			<option value="1">朝</option>
+			<option value="2">昼</option>
+			<option value="3">夜</option>
 	</select>	
 			<input type="submit" value="表示" style="position: absolute; left: 26%; top: 35%; background-color:#FFCCCC"/>
 	</form>	
