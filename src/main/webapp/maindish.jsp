@@ -141,7 +141,7 @@
 		 <input type="submit"value="タグ追加" style="width:150px;height:60px;background-color:#FFFFBB">
 	</form>
 	
-	 <form method="POST" action="calendar.jsp">
+	 <form method="POST" action="CalendarServlet">
 		 <input type="submit"value="戻る" style="width:150px;height:60px;background-color:#FFFFBB">
 	</form>
 	</div>
