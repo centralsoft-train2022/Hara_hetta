@@ -25,81 +25,97 @@ import dao.WarningDao;
 import dao.WarningVo;
 
 @WebServlet("/CalendarServlet")
-public class CalendarServlet extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+public class CalendarServlet extends HttpServlet
+{
+	protected void doPost( HttpServletRequest request, HttpServletResponse response )
+	        throws ServletException, IOException
+	{
 
-		WarningBean bean2 = new WarningBean();
-		bean2.setWarningList(getWarning());
-		request.setAttribute("bean", bean2);
+		WarningBean bean2 = new WarningBean( );
+		bean2.setWarningList( getWarning( ) );
+		request.setAttribute( "bean", bean2 );
 
-		List<DishVo> list = sql();
+		List<DishVo> list = sql( );
 
-		CalenderBean bean = new CalenderBean();
-		List<DishVo> dishList = sql();
+		CalenderBean	bean		= new CalenderBean( );
+		List<DishVo>	dishList	= sql( );
 
-		bean.setDishList(dishList);
+		bean.setDishList( dishList );
 
-		for (dao.DishVo vo : bean.getDishList()) {
-			bean.setDishName(vo.getDishName());
-			bean.setDishDate(vo.getDishDate());
+		for( dao.DishVo vo : bean.getDishList( ) )
+		{
+			bean.setDishName( vo.getDishName( ) );
+			bean.setDishDate( vo.getDishDate( ) );
 
 		}
 
-		Map<String, List> foodMap = new HashMap<String, List>();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-M-d");
-		for (DishVo dishVo : dishList) {
-			String str = formatter.format(dishVo.getDishDate());
-			List<String> foodNameList = foodMap.get(str);
-			if (foodNameList == null) {
-				foodNameList = new ArrayList<String>();
+		Map<String, List>	foodMap		= new HashMap<String, List>( );
+		SimpleDateFormat	formatter	= new SimpleDateFormat( "yyyy-M-d" );
+
+		for( DishVo dishVo : dishList )
+		{
+			String			str				= formatter.format( dishVo.getDishDate( ) );
+			List<String>	foodNameList	= foodMap.get( str );
+
+			if( foodNameList == null )
+			{
+				foodNameList = new ArrayList<String>( );
 			}
-			foodNameList.add(dishVo.getDishName());
-			foodMap.put(str, foodNameList);
+			foodNameList.add( dishVo.getDishName( ) );
+			foodMap.put( str, foodNameList );
 
 		}
 
-		Map<String, String[]> foodName = new HashMap<String, String[]>();
+		Map<String, String[]> foodName = new HashMap<String, String[]>( );
 
-		for (String key : foodMap.keySet()) {
-			List<String> foodValues = foodMap.get(key);
-			foodName.put(key, foodValues.toArray(new String[foodValues.size()]));
+		for( String key : foodMap.keySet( ) )
+		{
+			List<String> foodValues = foodMap.get( key );
+			foodName.put( key, foodValues.toArray( new String[foodValues.size( )] ) );
 		}
 
-		request.setAttribute("foodName", foodName);
+		request.setAttribute( "foodName", foodName );
 
-		RequestDispatcher disp = request.getRequestDispatcher("calendar.jsp");
-		disp.forward(request, response);
+		RequestDispatcher disp = request.getRequestDispatcher( "calendar.jsp" );
+		disp.forward( request, response );
 	}
 
-	private static List<DishVo> sql() {
-		List<DishVo> dishList = new ArrayList<DishVo>();
+	private static List<DishVo> sql()
+	{
+		List<DishVo> dishList = new ArrayList<DishVo>( );
 
-		DBUtil util = new DBUtil();
+		DBUtil util = new DBUtil( );
 
-		try (Connection con = util.getConnection();) {
+		try( Connection con = util.getConnection( ); )
+		{
 
-			DishsaveDao dao = new DishsaveDao(con);
+			DishsaveDao dao = new DishsaveDao( con );
 
-			dishList = dao.getDish();
+			dishList = dao.getDish( );
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
+		}
+		catch( SQLException e )
+		{
+			throw new RuntimeException( e );
 		}
 		return dishList;
 	}
 
-	private List<WarningVo> getWarning() {
+	private List<WarningVo> getWarning()
+	{
 
-		DBUtil db = new DBUtil();
+		DBUtil db = new DBUtil( );
 
-		try (Connection c = db.getConnection()) {
-			WarningDao warningdao = new WarningDao(c);
-			List<WarningVo> WarningList = warningdao.getWarning();
+		try( Connection c = db.getConnection( ) )
+		{
+			WarningDao		warningdao	= new WarningDao( c );
+			List<WarningVo>	WarningList	= warningdao.getWarning( );
 
 			return WarningList;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
+		}
+		catch( SQLException e )
+		{
+			throw new RuntimeException( e );
 		}
 
 	}
