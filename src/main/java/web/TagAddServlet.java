@@ -31,36 +31,45 @@ public class TagAddServlet extends HttpServlet
 		String	stKikanStr	= request.getParameter( "radiobutton" );
 		String	stCountStr	= request.getParameter( "cnt" );
 
-		int	stKikan	= Integer.parseInt( stKikanStr );
-		int	stCount	= Integer.parseInt( stCountStr );
+		if( tnStr.equals( "" ) || stKikanStr.equals( "" ) || stCountStr.equals( "" ) )
+		{
+			RequestDispatcher disp = request.getRequestDispatcher( "addTag.jsp" );
+			disp.forward( request, response );
 
-		// セッションに保存
-		HttpSession session = request.getSession( );
-		session.setAttribute( "TagName", tnStr );
-		session.setAttribute( "WarningSetting", stKikan );
-		session.setAttribute( "WarningCount", stCount );
+		}
+		else
+		{
+			int	stKikan	= Integer.parseInt( stKikanStr );
+			int	stCount	= Integer.parseInt( stCountStr );
 
-		// セッションのObject型からint型への変換
-		int	wstKikan	= (Integer) session.getAttribute( "WarningSetting" );
-		int	wstCount	= (Integer) session.getAttribute( "WarningCount" );
+			// セッションに保存
+			HttpSession session = request.getSession( );
+			session.setAttribute( "TagName", tnStr );
+			session.setAttribute( "WarningSetting", stKikan );
+			session.setAttribute( "WarningCount", stCount );
 
-		// LoginServletのセッションからuserIDを取得
-		int uid = (Integer) session.getAttribute( "UserID" );
-		System.out.println( uid );
+			// セッションのObject型からint型への変換
+			int	wstKikan	= (Integer) session.getAttribute( "WarningSetting" );
+			int	wstCount	= (Integer) session.getAttribute( "WarningCount" );
 
-		insertTag( tnStr, uid, wstKikan, wstCount );
+			// LoginServletのセッションからuserIDを取得
+			int uid = (Integer) session.getAttribute( "UserID" );
+			System.out.println( uid );
 
-		TagAddBean bean = new TagAddBean( );
-		bean.setTagName( tnStr );
-		bean.setWarningSetting( stKikan );
-		bean.setWarningCount( wstCount );
-		bean.setWarningSetingName( stCountStr );
+			insertTag( tnStr, uid, wstKikan, wstCount );
 
-		request.setAttribute( "bean", bean );
+			TagAddBean bean = new TagAddBean( );
+			bean.setTagName( tnStr );
+			bean.setWarningSetting( stKikan );
+			bean.setWarningCount( wstCount );
+			bean.setWarningSetingName( stCountStr );
 
-		// 次の画面に遷移
-		RequestDispatcher disp = request.getRequestDispatcher( "registeredTag.jsp" );
-		disp.forward( request, response );
+			request.setAttribute( "bean", bean );
+
+			// 次の画面に遷移
+			RequestDispatcher disp = request.getRequestDispatcher( "registeredTag.jsp" );
+			disp.forward( request, response );
+		}
 	}
 
 	// Cnnection取得
