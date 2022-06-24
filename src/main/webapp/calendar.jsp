@@ -26,7 +26,7 @@ var foodName= <%= a.writeValueAsString(request.getAttribute("foodName")) %>;
 </head>
 <body>
 <body>
-	<h3 class="cauntion" >警告メッセージ</h3>	
+	<h3 class="cauntion" ></h3>	
 	<div class ="content">
 	<% for( dao.WarningVo warning:  bean.getWarningList(  )){ %>
 		<font color="red" size="5"><b>
