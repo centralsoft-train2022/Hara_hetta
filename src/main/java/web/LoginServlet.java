@@ -60,8 +60,12 @@ public class LoginServlet extends HttpServlet {
 
 			if (!isLogin) {
 
+				String sort = "2";
+				String time = "1";
 				DishTagAllBean bean = new DishTagAllBean();
 				bean.setTagList(getTag_TagId());
+				bean.setSort(sort);
+				bean.setTime(time);
 
 				request.setAttribute("bean", bean);
 
