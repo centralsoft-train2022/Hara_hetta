@@ -26,10 +26,10 @@ var foodName= <%= a.writeValueAsString(request.getAttribute("foodName")) %>;
 </head>
 <body>
 <body>
-	<h1 class="cauntion" >警告メッセージ</h1>	
+	<h3 class="cauntion" >警告メッセージ</h3>	
 	<div class ="content">
 	<% for( dao.WarningVo warning:  bean.getWarningList(  )){ %>
-		<font color="black" size="5"><b>
+		<font color="red" size="5"><b>
 		[警告]
 		'<%=warning.getTagName()%>'を'<%=warning.getWarningCount()%>'回以上食べてます
 		</b></font>
