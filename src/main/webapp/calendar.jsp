@@ -79,7 +79,7 @@ var foodName= <%= a.writeValueAsString(request.getAttribute("foodName")) %>;
 
 	<br>
 
-	<form method="POST" action="top.jsp">
+	<form method="POST" action="cKaraHomeServlet">
 		<input type="submit" value="ホームに戻る" style="width:130px;height:50px;background-color:#FFFFBB">
 	</form>
 	</div>
