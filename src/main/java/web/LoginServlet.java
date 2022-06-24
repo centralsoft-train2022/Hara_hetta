@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 
 			if (!isLogin) {
 
-				String sort = "2";
+				String sort = "1";
 				String time = "1";
 				DishTagAllBean bean = new DishTagAllBean();
 				bean.setTagList(getTag_TagId());
@@ -97,7 +97,7 @@ public class LoginServlet extends HttpServlet {
 
 		try (Connection c = db.getConnection()) {
 			DishTagIdDao tgAlldao = new DishTagIdDao(c);
-			List<DishVo> tgDishAllList = tgAlldao.getDishTagId("2", "1");
+			List<DishVo> tgDishAllList = tgAlldao.getDishTagId("1", "1");
 
 			return tgDishAllList;
 		} catch (SQLException e) {

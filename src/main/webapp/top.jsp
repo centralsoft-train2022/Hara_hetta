@@ -120,7 +120,7 @@
     	<%}%>
     	],
     datasets: [{
-      label: 'グラフ',
+      label: '食べたタグ数',
       
       data: [ 
     	  <% for( dao.DishVo dishTag:  bean.getTagList(  )){ %>
