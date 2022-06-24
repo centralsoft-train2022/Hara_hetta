@@ -29,6 +29,8 @@ public class DescAscKirikaeServlet extends HttpServlet {
 		String time = request.getParameter("time");
 		DishTagAllBean bean = new DishTagAllBean();
 		bean.setTagList(getTag_TagId(sort, time));
+		bean.setSort(sort);
+		bean.setTime(time);
 
 		request.setAttribute("bean", bean);
 

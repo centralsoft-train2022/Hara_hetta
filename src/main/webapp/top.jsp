@@ -62,14 +62,39 @@
    	
    	<form method="POST" action="DescAscKirikaeServlet">
 	<select name="sort" class="sort">
-			<option value="1">昇順</option>
+		<% if(bean.getSort().equals("1")){ %>
+		
+			<option value="1"selected>昇順</option>
 			<option value="2">降順</option>	
+			
+		<% }else if(bean.getSort().equals("2")){ %>
+		
+			<option value="1">昇順</option>
+			<option value="2"selected>降順</option>	
+		
+		<% } %>
 	</select>
 	
 	<select name="time" class="time">
-			<option value="1">朝</option>
+		<% if(bean.getTime().equals("1")){ %>
+		
+			<option value="1" selected>朝</option>
 			<option value="2">昼</option>
 			<option value="3">夜</option>
+			
+		<% }else if(bean.getTime().equals("2")){ %>
+		
+			<option value="1" >朝</option>
+			<option value="2" selected>昼</option>
+			<option value="3">夜</option>
+			
+		<% }else if(bean.getTime().equals("3")){ %>
+		
+			<option value="1" >朝</option>
+			<option value="2" >昼</option>
+			<option value="3" selected>夜</option>
+			
+		<% } %>
 	</select>	
 			<input type="submit" value="表示" style="position: absolute; left: 26%; top: 35%; background-color:#FFCCCC"/>
 	</form>	
